@@ -1,0 +1,26 @@
+#jplayer
+= content_tag :div, id: "player", data: { station: @station.name } do
+  .header
+  .cover
+    = image_tag @song.cover, id: "cover"
+  .status
+    %marquee{behavior: "scroll", scrollamount: "1", direction: "left", width: "190"}
+      %span#artist
+        = @song.artist
+      \-
+      %span#title
+        = @song.title
+  .footer
+    = link_to "#", class: "button", id: "switch", data: { position: "on" } do
+      = image_tag "switch-on.png"
+    .social
+      = link_to "#", class: "button", id: "facebook" do
+        = image_tag "facebook.png"
+      = link_to "#", class: "button", id: "twitter" do
+        = image_tag "twitter.png"
+      = link_to "#", class: "button", id: "mail" do
+        = image_tag "mail.png"
+    .volume-bar
+    #volume.dragdealer
+      .handle
+        = image_tag "volume-cursor.png"

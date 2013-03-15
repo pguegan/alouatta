@@ -1,0 +1,5 @@
+.stations
+  %h1 Stations MyJungly
+  - @stations.each do |station|
+    .station
+      = link_to station.name, station_path(station)

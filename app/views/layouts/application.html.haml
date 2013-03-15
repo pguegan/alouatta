@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %title Rider Radio
+    %meta{"http-equiv" => "Content-Type", content: "text/html; charset=utf-8"}
+    %meta{name: "viewport", content: "width=640, user-scalable=no"}
+    %meta{name: "description", content: "Rider Radio Stream"}
+    %meta{name: "author", content: "My Jungly"}
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}
+    %meta{name: "apple-mobile-web-app-status-bar-style", content: "black"}
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    %link{rel: "apple-touch-icon-precomposed", sizes: "144x144", href: image_path("apple-touch-icon-144-precomposed.png")}
+    %link{rel: "apple-touch-icon-precomposed", sizes: "114x114", href: image_path("apple-touch-icon-114-precomposed.png")}
+    %link{rel: "apple-touch-icon-precomposed", sizes: "72x72", href: image_path("apple-touch-icon-72-precomposed.png")}
+    %link{rel: "apple-touch-icon-precomposed", href: image_path("apple-touch-icon-57-precomposed.png")}
+    %link{rel: "shortcut icon", href: image_path("favicon.png")}
+  %body
+    = yield

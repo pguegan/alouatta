@@ -1,0 +1,112 @@
+body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, fieldset, legend, label, input, textarea
+  margin: 0
+  padding: 0
+  border: 0
+
+html, body
+  background-color: #000
+  height: 416px
+  color: #fff
+  font-family: Arial, Helvetica, Sans-Serif
+
+.stations
+  text-align: center
+  margin-top: 20px
+
+.station
+  a
+    margin-top: 10px
+    font-size: 30px
+    display: inline-block
+    padding: 10px
+    line-height: 40px
+    width: 319px
+    height: 40px
+    border: 1px solid #aaa
+    color: #aaa
+    text-decoration: none
+    &:visited
+      color: #aaa
+    &:hover
+      color: #fff
+      border: 1px solid #fff
+
+#player
+  position: absolute
+  width: 320px
+  height: 416px
+  background: url(background.jpg) no-repeat scroll
+  background-size: cover
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  .header
+    position: absolute
+    top: 0
+    background: url(header.png) top center no-repeat
+    width: 320px
+    height: 60px
+  .footer
+    position: absolute
+    bottom: 0
+    background: url(footer.png) bottom center no-repeat
+    width: 320px
+    height: 99px
+    a#switch
+      position: absolute
+      bottom: 55px
+      left: 10px
+    .social
+      position: absolute
+      bottom: 70px
+      left: 110px
+      width: 98px
+      height: 26px
+      a
+        float: left
+      a#facebook
+        margin-right: 10px
+      a#twitter
+        margin-right: 10px
+      a#twitter
+    .volume-bar
+      position: absolute
+      bottom: 15px
+      width: 320px
+      height: 16px
+      background-color: transparent
+      background-image: url(volume-bar.png)
+      background-repeat: no-repeat
+  .cover
+    position: relative
+    top: 80px
+    text-align: center
+    img
+      width: 200px
+      height: 200px
+  .status
+    position: relative
+    top: 75px
+    left: 60px
+    width: 190px
+    height: 15px
+    padding: 5px
+    background-color: #82734d
+    font-size: 13px
+  a.button
+    display: block
+    width: 26px
+    height: 26px
+
+.dragdealer
+  position: absolute
+  width: 212px
+  height: 16px
+  bottom: 15px
+  padding-left: 60px
+  .handle
+    position: absolute
+    cursor: pointer
+    margin-top: -7px
+  .disabled
+    background: #898989
