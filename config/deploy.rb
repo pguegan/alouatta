@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 
-server "ssh.alwaysdata.com", :web, :app, :db, primary: true
+server "ssh.alwaysdata.com", :web, :app, primary: true
 
 set :application, "alouatta"
 set :application_folder, "alouatta"
