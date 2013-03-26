@@ -14,7 +14,6 @@ jQuery ->
     })
 
     timer = $.timer( ->
-      console.log("Timer elapsed")
       $.ajax({
         url: "/stations/#{station}/status.json"
         headers: { "If-None-Match": etag }
@@ -24,7 +23,6 @@ jQuery ->
             $('#title').html(data.song.title)
             $('#cover').attr('src', data.song.cover)
             etag = xhr.getResponseHeader('ETag')
-            console.log("New ETag: #{etag}")
       })
     )
     timer.set({ time : 5000, autostart : true })
