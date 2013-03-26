@@ -1,12 +1,7 @@
 jQuery ->
   if $('#player').length
+    etag = null
     station = $('#player').data('station')
-
-    new Dragdealer('volume',
-      x: 0.8
-      callback: (x, y) ->
-        $("#jplayer").jPlayer("volume", x)
-    )
 
     $("#jplayer").jPlayer({
       ready: ->
@@ -19,11 +14,18 @@ jQuery ->
     })
 
     timer = $.timer( ->
-      $.get("/stations/#{station}/status.json", (data) ->
-        $('#artist').html(data.song.artist)
-        $('#title').html(data.song.title)
-        $('#cover').attr('src', data.song.cover)
-      )
+      console.log("Timer elapsed")
+      $.ajax({
+        url: "/stations/#{station}/status.json"
+        headers: { "If-None-Match": etag }
+        success: (data, status, xhr) ->
+          if xhr.status == 200
+            $('#artist').html(data.song.artist)
+            $('#title').html(data.song.title)
+            $('#cover').attr('src', data.song.cover)
+            etag = xhr.getResponseHeader('ETag')
+            console.log("New ETag: #{etag}")
+      })
     )
     timer.set({ time : 5000, autostart : true })
 
@@ -36,9 +38,15 @@ jQuery ->
         $(this).data("position", "off")
       else
         $("#jplayer").jPlayer("play")
-        timer.play()
+        timer.play(true)
         $(this).find('img').attr('src', "/assets/switch-on.png")
         $(this).data("position", "on")
       false
 
     $('marquee').marquee()
+
+    new Dragdealer('volume',
+      x: 0.8
+      callback: (x, y) ->
+        $("#jplayer").jPlayer("volume", x)
+    )
