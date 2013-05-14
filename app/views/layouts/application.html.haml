@@ -2,7 +2,7 @@
 %html
   %head
     %meta{charset: "utf-8"}
-    %title Rider Radio
+    %title= @title
     %meta{"http-equiv" => "Content-Type", content: "text/html; charset=utf-8"}
     %meta{name: "viewport", content: "width=640, user-scalable=no"}
     %meta{name: "description", content: "Rider Radio Stream"}
@@ -18,5 +18,6 @@
     %link{rel: "apple-touch-icon-precomposed", sizes: "72x72", href: image_path("apple-touch-icon-72-precomposed.png")}
     %link{rel: "apple-touch-icon-precomposed", href: image_path("apple-touch-icon-57-precomposed.png")}
     %link{rel: "shortcut icon", href: image_path("favicon.png")}
+    = render 'layouts/ga'
   %body
     = yield
