@@ -53,22 +53,17 @@ html, body
     width: 320px
     height: 99px
     a#switch
+      display: block
       position: absolute
       bottom: 55px
       left: 10px
-    .social
-      position: absolute
-      bottom: 70px
-      left: 110px
-      width: 98px
+      width: 26px
       height: 26px
-      a
-        float: left
-      a#facebook
-        margin-right: 10px
-      a#twitter
-        margin-right: 10px
-      a#twitter
+      text-indent: -1000px
+      &.on
+        background-image: url(switch-on.png)
+      &.off
+        background-image: url(switch-off.png)
     .volume-bar
       position: absolute
       bottom: 15px
@@ -82,6 +77,7 @@ html, body
     top: 80px
     text-align: center
     img
+      text-align: center
       width: 200px
       height: 200px
   .status
@@ -92,21 +88,17 @@ html, body
     height: 15px
     padding: 5px
     background-color: #82734d
-    font-size: 13px
-  a.button
-    display: block
-    width: 26px
-    height: 26px
-
-.dragdealer
-  position: absolute
-  width: 212px
-  height: 16px
-  bottom: 15px
-  padding-left: 60px
-  .handle
-    position: absolute
-    cursor: pointer
-    margin-top: -7px
-  .disabled
-    background: #898989
+    font-size: 13px  
+  .dragdealer
+    width: 255px
+    padding-left: 60px
+    .handle
+      position: absolute
+      cursor: pointer
+      margin-top: -7px
+      .cursor
+        width: 40px
+        height: 23px
+        background-image: url(volume-cursor.png)
+    .disabled
+      background: #898989

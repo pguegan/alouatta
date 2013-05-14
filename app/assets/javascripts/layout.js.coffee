@@ -28,17 +28,17 @@ jQuery ->
     timer.set({ time : 5000, autostart : true })
 
     $("a#switch").click ->
-      position = $(this).data("position")
+      position = $(this).attr("class")
       if (position == "on")
         $("#jplayer").jPlayer("stop")
         timer.pause()
-        $(this).find('img').attr('src', "/assets/switch-off.png")
-        $(this).data("position", "off")
+        $(this).attr('class', "off")
+        $(this).html("ON")
       else
         $("#jplayer").jPlayer("play")
         timer.play(true)
-        $(this).find('img').attr('src', "/assets/switch-on.png")
-        $(this).data("position", "on")
+        $(this).attr('class', "on")
+        $(this).html("OFF")
       false
 
     $('marquee').marquee()

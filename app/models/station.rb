@@ -11,7 +11,7 @@ class Station
   end
 
   def self.all
-    @@stations ||= %w{rider-radio adidas classics hip-hop hits lounge myjungly pop-rock soul-funk une-autre-radio}.map { |name| Station.new(name.upcase) }
+    @@stations ||= %w{cpor rider-radio adidas classics hip-hop hits lounge myjungly pop-rock soul-funk une-autre-radio}.map { |name| Station.new(name.upcase) }
   end
 
   def to_param
