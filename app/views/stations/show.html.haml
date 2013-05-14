@@ -4,10 +4,11 @@
   .cover
     = image_tag @song.cover, id: "cover"
   .status
-    %marquee{behavior: "scroll", scrollamount: "1", direction: "left", width: "190"}
+    .marquee{behavior: "scroll", scrollamount: "1", direction: "left"}
       %span#artist
         = @song.artist
-      \-
+      %span.separator
+        \-
       %span#title
         = @song.title
   .footer

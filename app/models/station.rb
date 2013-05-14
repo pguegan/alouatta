@@ -21,9 +21,29 @@ class Station
   def current_song
     document = Nokogiri::HTML(open('http://94.23.143.166:8000/title.xsl'))
     data = document.xpath("//pre").first.content.scan(Regexp.new("#{@name}\\|\\|(.+)\\s-\\s(.+)")).first
-    Song.new(data[0], data[1], "http://cdn.myjungly.fr/web/#{data[0]} - #{data[1]}.jpg")
+    Song.new data[0], data[1], cover_url(data)
   rescue
-    Song.new("My Jungly Music", "Radios sur mesure", "http://cdn.myjungly.fr/web/My%20Jungly%20Music%20-%20Radios%20sur%20mesure.jpg")
+    Song.new "My Jungly Music", "Radios sur mesure", default_cover_url
+  end
+
+private
+
+  def default_cover_url
+    case @name
+      when "cpor" then "/assets/cpor/default.jpg"
+      else "/assets/default.jpg"
+    end
+  end
+
+  def cover_url(data)
+    url = URI::encode("http://cdn.myjungly.fr/web/#{data[0]} - #{data[1]}.jpg")
+    begin
+      open(url).read
+    rescue
+      # 404 or something...
+      url = default_cover_url
+    end
+    url
   end
 
 end
