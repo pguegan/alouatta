@@ -5,7 +5,7 @@ require 'bundler/capistrano'
 server "94.23.143.149", :web, :app, :db, primary: true
 
 set :user, "philippeguegan"
-set :deploy_to, "/home/#{user}/www/#{application_folder}"
+set :deploy_to, "/home/#{user}/www"
 set :rails_env, "production"
 
 set :branch, "master"
