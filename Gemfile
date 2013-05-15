@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 
 gem 'thin'
 gem 'capistrano'
+gem 'rvm-capistrano'
 gem 'nokogiri'
 gem 'jbuilder'
 gem 'active_attr'
