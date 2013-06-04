@@ -3,6 +3,10 @@
   .header
   .cover
     = image_tag @song.cover, id: "cover"
+  - if @station.facebook_url.present?
+    = link_to "F", @station.facebook_url, id: "facebook", class: "social", target: "_blank"
+  - if @station.twitter_url.present?
+    = link_to "T", @station.twitter_url, id: "twitter", class: "social", target: "_blank"
   .status
     .marquee{behavior: "scroll", scrollamount: "1", direction: "left"}
       %span#artist
@@ -14,6 +18,17 @@
   .footer
     = link_to "OFF", "#", class: "on", id: "switch"
     .volume-bar
+      #volume-highlight
       #volume.dragdealer
         .handle
           .cursor
+  - if @station.name == "NEOPLANETE"
+    #overlay
+      %a#overlay-hide{href: "#"}
+        = image_tag "neoplanete/close.png"
+      %p
+        La Radio Néoplanète est en cours de développement et sera officiellement lancée en septembre prochain. Pour apporter votre contribution musicale, vos idées de chroniques ou tout simplement encourager l'équipe Néoplanète, cliquez ici :
+        %br
+        = mail_to "contact@neoplanete.fr"
+    %a#overlay-show{href: "#"}
+      = image_tag "neoplanete/info.png"

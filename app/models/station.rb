@@ -11,7 +11,7 @@ class Station
   end
 
   def self.all
-    @@stations ||= %w{cpor rider-radio adidas classics hip-hop hits lounge myjungly pop-rock soul-funk une-autre-radio}.map { |name| Station.new(name.upcase) }
+    @@stations ||= %w{cpor rider-radio neoplanete adidas classics hip-hop hits lounge myjungly pop-rock soul-funk une-autre-radio}.map { |name| Station.new(name.upcase) }
   end
 
   def to_param
@@ -24,6 +24,18 @@ class Station
     Song.new data[0], data[1], cover_url(data)
   rescue
     Song.new "My Jungly Music", "Radios sur mesure", default_cover_url
+  end
+
+  def facebook_url
+    case @name
+      when "NEOPLANETE" then "https://www.facebook.com/neoplanete"
+    end
+  end
+
+  def twitter_url
+    case @name
+      when "NEOPLANETE" then "https://twitter.com/NEOPLANETE"
+    end
   end
 
 private
