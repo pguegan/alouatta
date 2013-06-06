@@ -18,4 +18,8 @@ class StationsController < ApplicationController
     @song = @station.current_song
   end
 
+  def link
+    @station = Station.new(params[:id])
+  end
+
 end
