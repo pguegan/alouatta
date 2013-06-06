@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'net/http'
 
 class Station
 
@@ -11,7 +12,7 @@ class Station
   end
 
   def self.all
-    @@stations ||= %w{cpor rider-radio neoplanete adidas classics hip-hop hits lounge myjungly pop-rock soul-funk une-autre-radio}.map { |name| Station.new(name.upcase) }
+    @@stations ||= %w{CPOR RIDER-RADIO NEOPLANETE ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO}.map { |name| Station.new(name) }
   end
 
   def to_param
@@ -42,20 +43,19 @@ private
 
   def default_cover_url
     case @name
-      when "cpor" then "/assets/cpor/default.jpg"
+      when "CPOR" then "/assets/cpor/default.jpg"
       else "/assets/default.jpg"
     end
   end
 
   def cover_url(data)
-    url = URI::encode("http://cdn.myjungly.fr/web/#{data[0]} - #{data[1]}.jpg")
-    begin
-      open(url).read
-    rescue
-      # 404 or something...
-      url = default_cover_url
+    http = Net::HTTP.new("cdn.myjungly.fr")
+    response = http.request Net::HTTP::Head.new(URI::encode("/web/#{data[0]} - #{data[1]}.jpg"))
+    if response.code == "200"
+      URI::encode("http://cdn.myjungly.fr/web/#{data[0]} - #{data[1]}.jpg")
+    else
+      default_cover_url
     end
-    url
   end
 
 end

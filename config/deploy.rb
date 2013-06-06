@@ -16,7 +16,7 @@ set :branch, "master"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-set :keep_releases, 1
+set :keep_releases, 4
 set :git_enable_submodules, 1
 
 after "deploy", "deploy:cleanup"
