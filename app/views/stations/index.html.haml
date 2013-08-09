@@ -2,4 +2,4 @@
   %h1 Stations MyJungly
   - @stations.each do |station|
     .station
-      = link_to station.name, "#", onclick: "window.open('#{station_url(station)}', '', 'location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, width=320, height=416', 'true')"
+      = link_to station.name, "#", onclick: "window.open('#{station_url(station)}', '', 'location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, width=320, height=416, innerHeight=446', 'true')"
