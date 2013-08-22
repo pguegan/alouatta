@@ -8,18 +8,18 @@ class StationsController < ApplicationController
   end
 
   def show
-    @station = Station.new(params[:id])
+    @station = Station.find(params[:id])
     @song = @station.current_song
     @title = @station.name
   end
 
   def status
-    @station = Station.new(params[:id])
+    @station = Station.find(params[:id])
     @song = @station.current_song
   end
 
   def link
-    @station = Station.new(params[:id])
+    @station = Station.find(params[:id])
   end
 
 end

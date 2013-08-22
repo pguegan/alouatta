@@ -15,6 +15,10 @@ class Station
     @@stations ||= %w{CPOR RIDER-RADIO NEOPLANETE ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO}.map { |name| Station.new(name) }
   end
 
+  def self.find(id)
+    @@stations.find { |station| station.name == id }
+  end
+
   def to_param
     @name
   end
