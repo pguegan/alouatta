@@ -1,0 +1,2 @@
+jQuery ->
+	$("marquee").marquee("marquee")

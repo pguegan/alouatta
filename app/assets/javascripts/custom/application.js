@@ -11,8 +11,4 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.timer
-//= require jquery.jplayer.min
 //= require jquery.marquee
-//= require dragdealer
-//= require_directory .

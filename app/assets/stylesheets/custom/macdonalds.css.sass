@@ -1,0 +1,90 @@
+@font-face
+  font-family: 'chunkfive_exregular'
+  src: url('/assets/chunkfive-webfont.eot')
+  src: url('/assets/chunkfive-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/chunkfive-webfont.woff') format('woff'), url('/assets/chunkfive-webfont.ttf') format('truetype'), url('/assets/chunkfive-webfont.svg#chunkfive_exregular') format('svg')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'nillandregular'
+  src: url('/assets/nilland-webfont.eot')
+  src: url('/assets/nilland-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/nilland-webfont.woff') format('woff'), url('/assets/nilland-webfont.ttf') format('truetype'), url('/assets/nilland-webfont.svg#nillandregular') format('svg')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'nillandbold'
+  src: url('/assets/nilland-bold-webfont.eot')
+  src: url('/assets/nilland-bold-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/nilland-bold-webfont.woff') format('woff'), url('/assets/nilland-bold-webfont.ttf') format('truetype'), url('/assets/nilland-bold-webfont.svg#nillandregular') format('svg')
+  font-weight: normal
+  font-style: normal
+
+body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, fieldset, legend, label, input, textarea
+  margin: 0
+  padding: 0
+  border: 0
+
+html, body
+  padding-top: 30px
+  text-align: center
+  width: 1000px
+  margin: 0 auto
+
+header
+  position: relative 
+  .logo
+    position: absolute
+    left: 0
+  h1
+    font-family: 'chunkfive_exregular'
+    font-size: 50px
+    color: #0a3810
+    border-bottom: 1px solid #ddd
+    width: 700px
+    margin-left: 150px
+  h2
+    font-family: 'nillandbold'
+    font-size: 14px
+    text-transform: uppercase
+    color: #0a3810
+    width: 700px
+    margin-top: 15px
+    margin-left: 150px
+
+.content
+  margin-top: 40px
+
+$marquee-background-color: #041607
+$marquee-width: 400px
+$marquee-height: 26px
+.marquee_wrapper
+  position: relative
+  background-color: $marquee-background-color
+  width: $marquee-width
+  height: $marquee-height
+  margin: 10px auto
+  &:before, &:after
+    position: absolute
+    content: ""
+    border: $marquee-height / 2 solid
+    border-top-color: $marquee-background-color
+    border-bottom-color: $marquee-background-color
+  &:before
+    left: -$marquee-height / 2
+    border-left-color: transparent
+    border-right-color: $marquee-background-color
+  &:after
+    right: -$marquee-height / 2
+    content: ""
+    border-left-color: $marquee-background-color
+    border-right-color: transparent
+  .marquee
+    z-index: 1
+    position: absolute
+    width: $marquee-width
+    color: #fff
+#song_title
+  font-family: 'chunkfive_exregular'
+  text-transform: uppercase
+#song_artist
+  font-family: 'nillandregular'

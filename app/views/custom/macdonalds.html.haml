@@ -1,0 +1,32 @@
+!!! 5
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %title Les Web Radios Mac Do
+    %meta{"http-equiv" => "Content-Type", content: "text/html; charset=utf-8"}
+    %meta{name: "viewport", content: "width=640, user-scalable=no"}
+    %meta{name: "description", content: "Les Web Radios Mac Do"}
+    %meta{name: "author", content: "My Jungly"}
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}
+    %meta{name: "apple-mobile-web-app-status-bar-style", content: "black"}
+    = stylesheet_link_tag "custom/macdonalds"
+    = javascript_include_tag "custom/application", "custom/macdonalds"
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = render '/layouts/ga'
+  %body
+    %header
+      = image_tag "macdonalds/logo.png", class: "logo"
+      %h1
+        LES WEBRADIOS McDO
+      %h2
+        Découvrez les 4 stations musicales imaginées pour les GIE de Mc Donald's France
+    .content
+      = image_tag "macdonalds/hitmusic/title.png", id: "title"
+      .marquee_wrapper
+        %marquee.marquee{scrollamount: 2}
+          %span#song_title
+            Blurred Lines
+          \/
+          %span#song_artist
+            Robin Thicke feat Pharell
