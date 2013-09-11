@@ -11,4 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.timer
+//= require jquery.jplayer.min
 //= require jquery.marquee
+//= require modernizr
+//= require jquery.refineslide
+//= require_directory .

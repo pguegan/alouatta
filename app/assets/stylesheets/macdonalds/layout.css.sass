@@ -19,11 +19,6 @@
   font-weight: normal
   font-style: normal
 
-body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, fieldset, legend, label, input, textarea
-  margin: 0
-  padding: 0
-  border: 0
-
 html, body
   padding-top: 30px
   text-align: center
@@ -44,7 +39,7 @@ header
     margin-left: 150px
   h2
     font-family: 'nillandbold'
-    font-size: 14px
+    font-size: 16px
     text-transform: uppercase
     color: #0a3810
     width: 700px
@@ -62,7 +57,7 @@ $marquee-height: 26px
   background-color: $marquee-background-color
   width: $marquee-width
   height: $marquee-height
-  margin: 10px auto
+  margin: 10px auto 20px auto
   &:before, &:after
     position: absolute
     content: ""
@@ -88,3 +83,34 @@ $marquee-height: 26px
   text-transform: uppercase
 #song_artist
   font-family: 'nillandregular'
+
+.cube
+  height: 488px
+  background: url(shadow.png) center 400px no-repeat
+
+.rs-wrap
+  margin: 0 auto
+  .song_cover
+    z-index: -1
+    position: absolute
+    top: 55px
+    left: 55px
+    width: 226px
+    height: 226px
+  .rs-arrows
+    .rs-prev, .rs-next
+      position: absolute
+      top: 116px
+      display: block
+      width: 62px
+      height: 120px
+    .rs-prev
+      left: -220px
+      background: url(previous.png) no-repeat
+      &:hover
+        background: url(previous_hover.png) no-repeat
+    .rs-next
+      right: -220px
+      background: url(next.png) no-repeat
+      &:hover
+        background: url(next_hover.png) no-repeat

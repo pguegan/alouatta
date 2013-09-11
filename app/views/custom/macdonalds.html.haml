@@ -9,10 +9,10 @@
     %meta{name: "author", content: "My Jungly"}
     %meta{name: "apple-mobile-web-app-capable", content: "yes"}
     %meta{name: "apple-mobile-web-app-status-bar-style", content: "black"}
-    = stylesheet_link_tag "custom/macdonalds"
-    = javascript_include_tag "custom/application", "custom/macdonalds"
+    = stylesheet_link_tag "macdonalds/application"
+    = javascript_include_tag "macdonalds/application"
     /[if lt IE 9]
-      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js", "respond"
     = render '/layouts/ga'
   %body
     %header
@@ -26,7 +26,13 @@
       .marquee_wrapper
         %marquee.marquee{scrollamount: 2}
           %span#song_title
-            Blurred Lines
-          \/
+          %span#song_separator
+            \/
           %span#song_artist
-            Robin Thicke feat Pharell
+      .cube
+        %ul.rs-slider
+          - %w{ hitmusic poprock legends lounge }.each_with_index do |id, index|
+            %li{class: index == 0 && "current", data: {id: id, station: "MCDO#{index + 1}-"}}
+              = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
+              = image_tag "macdonalds/#{id}/box.png", class: "face"
+      #player{data: { station: "MCDO1-" }}

@@ -12,11 +12,11 @@ class Station
   end
 
   def self.all
-    @@stations ||= %w{CPOR RIDER-RADIO NEOPLANETE ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO}.map { |name| Station.new(name) }
+    stations
   end
 
   def self.find(id)
-    @@stations.find { |station| station.name == id }
+    stations.find { |station| station.name == id }
   end
 
   def to_param
@@ -24,8 +24,13 @@ class Station
   end
 
   def current_song
-    document = Nokogiri::HTML(open('http://94.23.143.166:8000/title.xsl'))
-    data = document.xpath("//pre").first.content.scan(Regexp.new("#{@name}\\|\\|(.+)\\s-\\s(.+)")).first
+    if @name =~ /MCDO\d-/
+      document = JSON.parse(open('http://mcdo.stream.instore.as57581.net/json.xsl').read)
+      data = document["mounts"].select { |mount| mount["mount"] == "/#{@name}" }.first["title"].scan(Regexp.new("(.+)\\s-\\s(.+)")).first
+    else
+      document = Nokogiri::HTML(open('http://94.23.143.166:8000/title.xsl'))
+      data = document.xpath("//pre").first.content.scan(Regexp.new("#{@name}\\|\\|(.+)\\s-\\s(.+)")).first
+    end
     Song.new data[0], data[1], cover_url(data)
   rescue
     Song.new "My Jungly Music", "Radios sur mesure", default_cover_url
@@ -44,6 +49,10 @@ class Station
   end
 
 private
+
+  def self.stations
+    @@stations ||= %w{CPOR RIDER-RADIO NEOPLANETE ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4-}.map { |name| Station.new(name) }
+  end
 
   def default_cover_url
     case @name
