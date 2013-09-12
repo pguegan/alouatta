@@ -35,14 +35,26 @@
         %ul.rs-slider
           %li.current{data: {id: "hitmusic", station: "MCDO1-"}}
             = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            = image_tag "macdonalds/hitmusic/box.png", class: "face"
+            - if params[:rounded].present?
+              = image_tag "macdonalds/hitmusic/box_rounded.png", class: "face"
+            - else
+              = image_tag "macdonalds/hitmusic/box.png", class: "face"
           %li{data: {id: "poprock", station: "MCDO4-"}}
             = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            = image_tag "macdonalds/poprock/box.png", class: "face"
+            - if params[:rounded].present?
+              = image_tag "macdonalds/poprock/box_rounded.png", class: "face"
+            - else
+              = image_tag "macdonalds/poprock/box.png", class: "face"
           %li{data: {id: "legends", station: "MCDO2-"}}
             = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            = image_tag "macdonalds/legends/box.png", class: "face"
+            - if params[:rounded].present?
+              = image_tag "macdonalds/legends/box_rounded.png", class: "face"
+            - else
+              = image_tag "macdonalds/legends/box.png", class: "face"
           %li{data: {id: "lounge", station: "MCDO3-"}}
             = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            = image_tag "macdonalds/lounge/box.png", class: "face"
+            - if params[:rounded].present?
+              = image_tag "macdonalds/lounge/box_rounded.png", class: "face"
+            - else
+              = image_tag "macdonalds/lounge/box.png", class: "face"
       #player{data: { station: "MCDO1-" }}
