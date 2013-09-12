@@ -17,6 +17,7 @@ jQuery ->
   player = $("#player")
   station = player.data('station')
   title = $("#title")
+  marquee = $(".marquee_wrapper")
 
   $("#song_separator").hide()
   $('#song_artist').html("Chargement...")
@@ -30,6 +31,13 @@ jQuery ->
     supplied: "mp3, oga"
     swfPath: "/assets"
   )
+
+  $("#volume").click ->
+    $(this).toggleClass("muted")
+    if $(this).hasClass("muted")
+      player.jPlayer("mute")
+    else
+      player.jPlayer("unmute")
 
   timer = $.timer( ->
     loadData()
@@ -46,20 +54,26 @@ jQuery ->
     onChange: ->
       $("#song_separator").hide()
       $('#song_artist').html("Chargement...")
-      id = this.slider.$nextSlide.data('id')
+      nextId = this.slider.$nextSlide.data('id')
+      currentId = this.slider.$currentSlide.data('id')
       this.slider.$currentSlide.removeClass("current")
       this.slider.$nextSlide.addClass("current")
       station = this.slider.$nextSlide.data('station')
       loadData()
-      title.fadeTo(0, 0, ->
-        title.attr("src", "/assets/macdonalds/#{id}/title.png").fadeTo(1500, 1)
+      title.fadeTo(100, 0, ->
+        title.attr("src", "/assets/macdonalds/#{nextId}/title.png")
       )
       player.jPlayer("stop")
+      marquee.fadeTo(100, 0, ->
+        marquee.removeClass(currentId).addClass(nextId)
+      )
     afterChange: ->
       player.jPlayer("setMedia", {
         mp3: "http://mcdo.stream.instore.as57581.net:8000/#{station}"
         oga: "http://mcdo.stream.instore.as57581.net:8000/#{station}.ogg"
-      }).jPlayer("play").data("station", station)
+      }).jPlayer("play").attr("data-station", station)
+      title.fadeTo(500, 1)
+      marquee.fadeTo(500, 1)
   )
 
   loadData()

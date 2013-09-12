@@ -55,9 +55,12 @@ private
   end
 
   def default_cover_url
-    case @name
-      when "CPOR" then "/assets/cpor/default.jpg"
-      else "/assets/default.jpg"
+    if @name =~ /CPOR/
+      "/assets/cpor/default.jpg"
+    elsif @name =~ /MCDO\d-/
+      "/assets/macdonalds/default_cover.jpg"
+    else
+      "/assets/default.jpg"
     end
   end
 

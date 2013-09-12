@@ -22,8 +22,10 @@
       %h2
         Découvrez les 4 stations musicales imaginées pour les GIE de Mc Donald's France
     .content
+      %a#volume{href: "javascript:void(0)"}
+        &nbsp;
       = image_tag "macdonalds/hitmusic/title.png", id: "title"
-      .marquee_wrapper
+      .marquee_wrapper.hitmusic
         %marquee.marquee{scrollamount: 2}
           %span#song_title
           %span#song_separator
@@ -31,8 +33,16 @@
           %span#song_artist
       .cube
         %ul.rs-slider
-          - %w{ hitmusic poprock legends lounge }.each_with_index do |id, index|
-            %li{class: index == 0 && "current", data: {id: id, station: "MCDO#{index + 1}-"}}
-              = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-              = image_tag "macdonalds/#{id}/box.png", class: "face"
+          %li.current{data: {id: "hitmusic", station: "MCDO1-"}}
+            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
+            = image_tag "macdonalds/hitmusic/box.png", class: "face"
+          %li{data: {id: "poprock", station: "MCDO4-"}}
+            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
+            = image_tag "macdonalds/poprock/box.png", class: "face"
+          %li{data: {id: "legends", station: "MCDO2-"}}
+            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
+            = image_tag "macdonalds/legends/box.png", class: "face"
+          %li{data: {id: "lounge", station: "MCDO3-"}}
+            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
+            = image_tag "macdonalds/lounge/box.png", class: "face"
       #player{data: { station: "MCDO1-" }}
