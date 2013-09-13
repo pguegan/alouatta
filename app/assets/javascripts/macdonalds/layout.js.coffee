@@ -51,6 +51,7 @@ jQuery ->
     maxWidth: 334
     useThumbs: false
     useArrows: true
+    startSlide: $(".rs-slider li.current").data("position")
     onChange: ->
       $("#song_separator").hide()
       $('#song_artist').html("Chargement...")

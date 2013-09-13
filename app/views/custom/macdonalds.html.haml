@@ -15,6 +15,9 @@
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js", "respond"
     = render '/layouts/ga'
   %body
+    - stations = { "hitmusic" => "MCDO1-", "poprock" => "MCDO4-", "legends" => "MCDO2-", "lounge" => "MCDO3-" }
+    - default_station_id = params[:station] || stations.first.first
+    - default_station_name = stations[default_station_id]
     %header
       = image_tag "macdonalds/logo.png", class: "logo"
       %h1
@@ -24,8 +27,8 @@
     .content
       %a#volume{href: "javascript:void(0)"}
         &nbsp;
-      = image_tag "macdonalds/hitmusic/title.png", id: "title"
-      .marquee_wrapper.hitmusic
+      = image_tag "macdonalds/#{default_station_id}/title.png", id: "title"
+      .marquee_wrapper{class: default_station_id}
         %marquee.marquee{scrollamount: 2}
           %span#song_title
           %span#song_separator
@@ -33,28 +36,8 @@
           %span#song_artist
       .cube
         %ul.rs-slider
-          %li.current{data: {id: "hitmusic", station: "MCDO1-"}}
-            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            - if params[:rounded].present?
-              = image_tag "macdonalds/hitmusic/box_rounded.png", class: "face"
-            - else
-              = image_tag "macdonalds/hitmusic/box.png", class: "face"
-          %li{data: {id: "poprock", station: "MCDO4-"}}
-            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            - if params[:rounded].present?
-              = image_tag "macdonalds/poprock/box_rounded.png", class: "face"
-            - else
-              = image_tag "macdonalds/poprock/box.png", class: "face"
-          %li{data: {id: "legends", station: "MCDO2-"}}
-            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            - if params[:rounded].present?
-              = image_tag "macdonalds/legends/box_rounded.png", class: "face"
-            - else
-              = image_tag "macdonalds/legends/box.png", class: "face"
-          %li{data: {id: "lounge", station: "MCDO3-"}}
-            = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
-            - if params[:rounded].present?
-              = image_tag "macdonalds/lounge/box_rounded.png", class: "face"
-            - else
-              = image_tag "macdonalds/lounge/box.png", class: "face"
-      #player{data: { station: "MCDO1-" }}
+          - stations.each_with_index do |(id, station), index|
+            %li{class: (id == default_station_id && "current"), data: {position: index, id: id, station: station}}
+              = image_tag "macdonalds/default_cover.jpg", class: "song_cover"
+              = image_tag "macdonalds/#{id}/box.png", class: "face"
+      #player{data: { station: default_station_name }}
