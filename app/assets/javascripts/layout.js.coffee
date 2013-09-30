@@ -41,7 +41,7 @@ jQuery ->
         $(this).html("OFF")
       false
 
-    $('#player[class!="cpor"][class!="neoplanete"] .marquee').marquee()
+    $('#player[class!="neoplanete"] .marquee').marquee()
 
     new Dragdealer('volume',
       x: 0.8

@@ -51,13 +51,11 @@ class Station
 private
 
   def self.stations
-    @@stations ||= %w{CPOR RIDER-RADIO NEOPLANETE ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4-}.map { |name| Station.new(name) }
+    @@stations ||= %w{RIDER-RADIO NEOPLANETE ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4-}.map { |name| Station.new(name) }
   end
 
   def default_cover_url
-    if @name =~ /CPOR/
-      "/assets/cpor/default.jpg"
-    elsif @name =~ /MCDO\d-/
+    if @name =~ /MCDO\d-/
       "/assets/macdonalds/default_cover.jpg"
     else
       "/assets/default.jpg"
