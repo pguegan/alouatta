@@ -15,6 +15,10 @@ class Station
     stations
   end
 
+  def self.index
+    stations.reject { |station| station.name =~ /MCDO\d-/ }
+  end
+
   def self.find(id)
     stations.find { |station| station.name == id }
   end

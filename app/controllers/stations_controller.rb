@@ -3,7 +3,7 @@ class StationsController < ApplicationController
   caches_action :status, expires_in: 5.seconds
   
   def index
-    @stations = Station.all
+    @stations = Station.index
     @title = "MyJungly Radios"
   end
 
