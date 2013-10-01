@@ -22,4 +22,11 @@ class StationsController < ApplicationController
     @station = Station.find(params[:id])
   end
 
+  def mini
+    @station = Station.find(params[:id])
+    @song = @station.current_song
+    @title = @station.name
+    render layout: nil
+  end
+
 end

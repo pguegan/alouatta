@@ -1,0 +1,25 @@
+!!! 5
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %title= @title
+    %meta{"http-equiv" => "Content-Type", content: "text/html; charset=utf-8"}
+    = stylesheet_link_tag "mini/application"
+    = javascript_include_tag "mini/application"
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = render '/layouts/ga'
+  %body
+    #jplayer
+    #player{class: @station.name.downcase, data: { station: @station.name }}
+      %a.close{href: "javascript:;"} &times;
+      %a.mute{href: "javascript:;"}
+      %h1 Écoutez la radio live&nbsp;!
+      .status.status-time
+        En ce moment
+        %span#current-time= l Time.now
+      .status.status-title
+        %span#current-title= @song.title
+      .status.status-artist
+        par
+        %span#current-artist= @song.artist

@@ -3,6 +3,7 @@ Alouatta::Application.routes.draw do
     member do
       get :status
       get :link
+      get :mini
     end
   end
   match "/:id" => "custom#show"

@@ -1,0 +1,41 @@
+body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, fieldset, legend, label, input, textarea
+  margin: 0
+  padding: 0
+  border: 0
+
+html, body
+  background-color: #fcb723
+  color: #000
+  font-family: Arial, Helvetica, Sans-Serif
+  font-size: 13px
+
+#player
+  padding: 15px 25px
+  h1
+    color: #fff
+    text-transform: uppercase
+    font-size: 13px
+    margin-bottom: 10px
+  a.close
+    position: absolute
+    top: 5px
+    left: 5px
+    color: #fff
+    text-decoration: none
+  .status
+    line-height: 16px
+    &.status-time
+      font-size: 11px
+    &.status-title
+      font-weight: bold
+  a.mute
+    position: absolute
+    top: 13px
+    right: 10px
+    text-decoration: none
+    display: block
+    width: 24px
+    height: 17px
+    background-image: url(switch-off.png)
+    &.on
+      background-image: url(switch-on.png)
