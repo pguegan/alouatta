@@ -10,7 +10,9 @@ jQuery ->
         $(this).jPlayer("setMedia", {
           mp3: "http://stream.myjungly.fr/#{station}"
           oga: "http://stream.myjungly.fr/#{station}.ogg"
-        }).jPlayer("play").jPlayer("mute")
+        }).jPlayer("play")
+        unless $("a.mute").hasClass("on")
+          $(this).jPlayer("mute")
       supplied: "mp3, oga"
       swfPath: "/assets"
     })
@@ -29,9 +31,11 @@ jQuery ->
     )
     timer.set({ time : 6000, autostart : true })
 
-    $("a.close").click ->
+    $("a.maximize").click ->
       player.jPlayer("clearMedia")
-      container.hide()
+      $('html').hide()
+      window.open($(this).attr('href'), '', 'location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, width=288, height=132, innerHeight=132', 'true')
+      false
 
     $("a.mute").click ->
       $(this).toggleClass("on")

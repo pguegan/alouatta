@@ -12,8 +12,6 @@
   %body
     #jplayer
     #player{class: @station.name.downcase, data: { station: @station.name }}
-      %a.close{href: "javascript:;"} &times;
-      %a.mute{href: "javascript:;"}
       %h1 Écoutez la radio live&nbsp;!
       .status.status-time
         En ce moment
@@ -23,3 +21,10 @@
       .status.status-artist
         par
         %span#current-artist= @song.artist
+      - if params[:cover].present?
+        .status.status-cover
+          = image_tag @song.cover, id: "current-cover"
+        %a.control.mute.on{href: "javascript:;"}
+      - else
+        %a.control.maximize{href: mini_station_url(@station, cover: true)}
+        %a.control.mute{href: "javascript:;"}
