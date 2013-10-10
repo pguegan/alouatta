@@ -26,6 +26,7 @@ jQuery ->
             $('#current-time').html(data.time)
             $('#current-artist').html(data.song.artist)
             $('#current-title').html(data.song.title)
+            $('#current-cover').attr('src', data.song.cover)
             etag = xhr.getResponseHeader('ETag')
       })
     )
