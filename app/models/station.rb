@@ -32,7 +32,7 @@ class Station
       document = JSON.parse(open('http://mcdo.stream.instore.as57581.net/json.xsl').read)
       data = document["mounts"].select { |mount| mount["mount"] == "/#{@name}" }.first["title"].scan(Regexp.new("(.+)\\s-\\s(.+)")).first
     else
-      document = Nokogiri::HTML(open('http://94.23.143.166:8000/title.xsl'))
+      document = Nokogiri::HTML(open('http://stream.myjungly.fr:8000/title.xsl'))
       data = document.xpath("//pre").first.content.scan(Regexp.new("#{@name}\\|\\|(.+)\\s-\\s(.+)")).first
     end
     Song.new data[0], data[1], cover_url(data)
