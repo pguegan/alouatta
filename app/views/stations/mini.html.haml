@@ -12,7 +12,9 @@
   %body
     #jplayer
     #player{class: @station.name.downcase, data: { station: @station.name }}
-      %h1 Écoutez la radio live&nbsp;!
+      %h1
+        .title Radio
+        = image_tag "neoplanete/logo.png"
       .status.status-time
         En ce moment
         %span#current-time= l Time.now
