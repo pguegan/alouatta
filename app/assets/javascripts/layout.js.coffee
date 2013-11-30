@@ -41,19 +41,10 @@ jQuery ->
         $(this).html("OFF")
       false
 
-    $('#player[class!="neoplanete"] .marquee').marquee()
+    $('#player .marquee').marquee()
 
     new Dragdealer('volume',
       x: 0.8
       callback: (x, y) ->
         $("#jplayer").jPlayer("volume", x)
-      animationCallback: (x, y) ->
-        $("#player.neoplanete #volume-highlight").css("width", x * 175)
     )
-
-    $("#player.neoplanete #overlay-show").click ->
-      $(this).hide()
-      $("#player.neoplanete #overlay").fadeIn()
-    $("#player.neoplanete #overlay-hide").click ->
-      $("#player.neoplanete #overlay").fadeOut()
-      $("#player.neoplanete #overlay-show").show()

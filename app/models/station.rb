@@ -40,22 +40,10 @@ class Station
     Song.new "My Jungly Music", "Radios sur mesure", default_cover_url
   end
 
-  def facebook_url
-    case @name
-      when "NEOPLANETE" then "https://www.facebook.com/neoplanete"
-    end
-  end
-
-  def twitter_url
-    case @name
-      when "NEOPLANETE" then "https://twitter.com/NEOPLANETE"
-    end
-  end
-
 private
 
   def self.stations
-    @@stations ||= %w{RIDER-RADIO NEOPLANETE ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4-}.map { |name| Station.new(name) }
+    @@stations ||= %w{RIDER-RADIO ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4-}.map { |name| Station.new(name) }
   end
 
   def default_cover_url
