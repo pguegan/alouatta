@@ -30,12 +30,15 @@ jQuery ->
     $("a#switch").click ->
       position = $(this).attr("class")
       if (position == "on")
-        $("#jplayer").jPlayer("stop")
+        $("#jplayer").jPlayer("clearMedia").jPlayer("stop")
         timer.pause()
         $(this).attr('class', "off")
         $(this).html("ON")
       else
-        $("#jplayer").jPlayer("play")
+        $("#jplayer").jPlayer("setMedia", {
+          mp3: "http://stream.myjungly.fr/#{station}"
+          oga: "http://stream.myjungly.fr/#{station}.ogg"
+        }).jPlayer("play")
         timer.play(true)
         $(this).attr('class', "on")
         $(this).html("OFF")
