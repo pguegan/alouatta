@@ -2,9 +2,10 @@
 %html{lang: "fr"}
   %head
     %meta{charset: 'utf-8'}
-    %meta{:content => "width=device-width, initial-scale=1.0, user-scalable=no", :name => "viewport"}
-    %meta{:content => "My Jungly", :name => "author"}
-    %title La Web Radio RIFFX
+    %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}
+    %meta{content: "My Jungly", name: "author"}
+    %meta{content: root_url.chop + image_path("riffx/logo.png"), property: 'og:image'}
+    %title La Web Radio RIFFX par Crédit Mutuel
     = stylesheet_link_tag "riffx/application"
     / [if lt IE 9]
       = javascript_include_tag "html5shiv", "respond"
@@ -12,10 +13,39 @@
     = render "/layouts/ga"
     = csrf_meta_tags
   %body
-    .container
-      .row
-        .col-sm-6.col-sm-offset-3
-          = image_tag "riffx/logo.png", class: "img-responsive"
-      .row
-        .col-xs-12
-          = image_tag "riffx/default_cover.jpg", class: "img-responsive", id: "cover"
+    #player
+    .outer
+      .middle
+        .container
+          %header.row
+            .col-lg-12
+              %a.btn-power.active.visible-xs{href: "javascript:void(0);"}
+                %i.fa.fa-power-off
+              = image_tag "riffx/logo.png"
+          .row.covers
+            .col-lg-12
+              .cover
+                = image_tag "riffx/default_cover.jpg", id: "song-cover"
+                %ul.social
+                  %li
+                    %a.btn-share.btn-share-twitter{href: '#', data: {url: request.original_url}}
+                      %i.fa.fa-twitter
+                  %li
+                    %a.btn-share.btn-share-facebook{href: '#', data: {url: request.original_url}}
+                      %i.fa.fa-facebook
+          .row.titles
+            .col-lg-12
+              #song-title
+              #song-artist
+                %i.fa.fa-refresh.fa-spin
+                Chargement...
+          .row
+            .col-lg-12
+              .controls.hidden-xs
+                %a.btn-power.active{href: "javascript:void(0);"}
+                  %i.fa.fa-power-off
+                .volume-bar
+                  #volume.dragdealer
+                    .handle
+                      .cursor
+                  #volume-highlight

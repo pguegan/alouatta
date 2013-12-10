@@ -14,4 +14,5 @@
 //= require jquery.timer
 //= require jquery.jplayer.min
 //= require modernizr
+//= require dragdealer
 //= require_directory .

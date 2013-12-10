@@ -16,7 +16,7 @@ class Station
   end
 
   def self.index
-    stations.reject { |station| station.name =~ /MCDO\d-/ }
+    stations.reject { |station| station.name =~ /MCDO\d-|RIFFX/ }
   end
 
   def self.find(id)
@@ -43,12 +43,14 @@ class Station
 private
 
   def self.stations
-    @@stations ||= %w{RIDER-RADIO ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4-}.map { |name| Station.new(name) }
+    @@stations ||= %w{RIDER-RADIO ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX}.map { |name| Station.new(name) }
   end
 
   def default_cover_url
     if @name =~ /MCDO\d-/
       "/assets/macdonalds/default_cover.jpg"
+    elsif @name == "RIFFX"
+      "/assets/riffx/default_cover.jpg"
     else
       "/assets/default.jpg"
     end
