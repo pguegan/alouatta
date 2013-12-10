@@ -53,8 +53,12 @@ jQuery ->
     callback: (x, y) ->
       player.jPlayer("volume", x)
     animationCallback: (x, y) ->
-      $("#volume-highlight").css("width", x * 250)
+      $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px")
   )
+
+  $('#btn-play').click ->
+    player.jPlayer("play")
+    $(this).fadeOut()
 
   loadData()
 
@@ -64,10 +68,10 @@ jQuery ->
     left   = ($(window).width()  - width)  / 2
     top    = ($(window).height() - height) / 2
     opts   = 'status=1,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left
-    url    = $(this).data("url")
     title  = "Web Radio RIFFX par Crédit Mutuel"
-    text   = "J'écoute #{$.trim($('#song-title').html())} de #{$.trim($('#song-artist').html())} sur la Web Radio RIFFX. #{url}"
-    window.open("https://www.facebook.com/sharer/sharer.php?s=100&p%5Burl%5Du=#{encodeURIComponent(url)}&p%5Btitle%5D=#{encodeURIComponent(title)}&p%5Bsummary%5D=#{encodeURIComponent(text)}&p%5Bimages%5D%5B0%5D=http://alouatta.alwaysdata.net/assets/riffx/logo.png", 'facebook-share-dialog', opts)
+    url    = 'http://www.riffx.fr'
+    text   = "J'écoute #{$.trim($('#song-title').html())} de #{$.trim($('#song-artist').html())} sur radio RIFFX. #{url}"
+    window.open("https://www.facebook.com/sharer/sharer.php?s=100&p%5Burl%5Du=#{encodeURIComponent(url)}&p%5Btitle%5D=#{encodeURIComponent(title)}&p%5Bsummary%5D=#{encodeURIComponent(text)}&p%5Bimages%5D%5B0%5D=#{encodeURIComponent($('#song-cover').attr('src'))}", 'facebook-share-dialog', opts)
     false
 
   $(".btn-share-twitter").click ->
@@ -76,7 +80,7 @@ jQuery ->
     left   = ($(window).width()  - width)  / 2
     top    = ($(window).height() - height) / 2
     opts   = 'status=1,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left
-    url    = $(this).data("url")
-    text   = "J'écoute #{$.trim($('#song-title').html())} de #{$.trim($('#song-artist').html())} sur la Web Radio RIFFX."
+    url    = 'http://www.riffx.fr'
+    text   = "J'écoute #{$.trim($('#song-title').html())} de #{$.trim($('#song-artist').html())} sur radio RIFFX."
     window.open("https://twitter.com/share?url=#{encodeURIComponent(url)}&text=#{encodeURIComponent(text)}", 'twitter', opts)
     false

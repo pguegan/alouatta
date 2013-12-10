@@ -5,7 +5,7 @@
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}
     %meta{content: "My Jungly", name: "author"}
     %meta{content: root_url.chop + image_path("riffx/logo.png"), property: 'og:image'}
-    %title La Web Radio RIFFX par Crédit Mutuel
+    %title Radio RIFFX by Crédit Mutuel
     = stylesheet_link_tag "riffx/application"
     / [if lt IE 9]
       = javascript_include_tag "html5shiv", "respond"
@@ -19,12 +19,16 @@
         .container
           %header.row
             .col-lg-12
-              %a.btn-power.active.visible-xs{href: "javascript:void(0);"}
-                %i.fa.fa-power-off
+              - if is_mobile_device?
+                %a.btn-power.active{href: "javascript:void(0);"}
+                  %i.fa.fa-power-off
               = image_tag "riffx/logo.png"
           .row.covers
             .col-lg-12
               .cover
+                - unless is_autoplay_device?
+                  %a#btn-play{href: "javascript:void(0);"}
+                    %i.fa.fa-play
                 = image_tag "riffx/default_cover.jpg", id: "song-cover"
                 %ul.social
                   %li
@@ -39,13 +43,14 @@
               #song-artist
                 %i.fa.fa-refresh.fa-spin
                 Chargement...
-          .row
-            .col-lg-12
-              .controls.hidden-xs
-                %a.btn-power.active{href: "javascript:void(0);"}
-                  %i.fa.fa-power-off
-                .volume-bar
-                  #volume.dragdealer
-                    .handle
-                      .cursor
-                  #volume-highlight
+          - unless is_mobile_device?
+            .row
+              .col-lg-12
+                .controls
+                  %a.btn-power.active{href: "javascript:void(0);"}
+                    %i.fa.fa-power-off
+                  .volume-bar
+                    #volume.dragdealer
+                      .handle
+                        .cursor
+                    #volume-highlight
