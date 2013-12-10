@@ -56,6 +56,9 @@ jQuery ->
       $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px")
   )
 
+  $(window).resize ->
+    $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px") 
+
   $('#btn-play').click ->
     player.jPlayer("play")
     $(this).fadeOut()

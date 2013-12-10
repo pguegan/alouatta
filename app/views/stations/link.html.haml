@@ -1,4 +1,4 @@
 .stations
   %h1= @station.name
   .station
-    = link_to "Ouvrir le lecteur", "#", onclick: "window.open('#{station_url(@station)}', '', 'location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, width=320, height=416, innerHeight=446', 'true')"
+    = link_to "Ouvrir le lecteur", "javascript:void(0);", onclick: "window.open('#{root_url}#{@station.path}', '', 'location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, width=320, height=416, innerHeight=446', 'true')"

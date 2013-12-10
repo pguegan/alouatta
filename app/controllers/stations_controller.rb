@@ -1,6 +1,8 @@
 class StationsController < ApplicationController
 
   caches_action :status, expires_in: 5.seconds
+
+  rescue_from StationNotFound, with: :station_not_found
   
   def index
     @stations = Station.index
@@ -27,6 +29,12 @@ class StationsController < ApplicationController
     @song = @station.current_song
     @title = @station.name
     render layout: nil
+  end
+
+private
+
+  def station_not_found
+    render nothing: true, status: :not_found
   end
 
 end

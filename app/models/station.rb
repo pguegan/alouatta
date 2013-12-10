@@ -20,11 +20,21 @@ class Station
   end
 
   def self.find(id)
-    stations.find { |station| station.name == id }
+    stations.find { |station| station.name.downcase == id.downcase } || (raise StationNotFound, "Couldn't find station with id=#{id}")
   end
 
   def to_param
     @name
+  end
+
+  def path
+    if @name =~ /MCDO\d-/
+      "macdonalds"
+    elsif @name == "RIFFX"
+      "riffx"
+    else
+      "stations/#{to_param}"
+    end
   end
 
   def current_song
@@ -43,7 +53,7 @@ class Station
 private
 
   def self.stations
-    @@stations ||= %w{RIDER-RADIO ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX}.map { |name| Station.new(name) }
+    @@stations ||= %w{ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX}.map { |name| Station.new(name) }
   end
 
   def default_cover_url
@@ -66,4 +76,7 @@ private
     end
   end
 
+end
+
+class StationNotFound < StandardError
 end
