@@ -6,6 +6,7 @@ Alouatta::Application.routes.draw do
       get :mini
     end
   end
-  match "/:id" => "custom#show"
+  get "/", to: "custom#show", defaults: {id: "riffx"}, constraints: {subdomain: "riffx"}
+  get "/:id", to: "custom#show"
   root to: "stations#index"
 end
