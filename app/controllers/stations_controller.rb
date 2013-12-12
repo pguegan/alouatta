@@ -3,6 +3,8 @@ class StationsController < ApplicationController
   caches_action :status, expires_in: 5.seconds
 
   rescue_from StationNotFound, with: :station_not_found
+
+  http_basic_authenticate_with name: "myjungly", password: "1707vTTv", only: :index
   
   def index
     @stations = Station.index
