@@ -53,7 +53,7 @@ class Station
 private
 
   def self.stations
-    @@stations ||= %w{ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX}.map { |name| Station.new(name) }
+    @@stations ||= %w{ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX RIDER-RADIO}.map { |name| Station.new(name) }
   end
 
   def default_cover_url
