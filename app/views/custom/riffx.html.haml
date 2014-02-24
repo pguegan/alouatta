@@ -10,7 +10,7 @@
     / [if lt IE 9]
       = javascript_include_tag "html5shiv", "respond"
     = javascript_include_tag "riffx/application"
-    = render "/layouts/ga"
+    = render partial: "/layouts/ga", locals: { code: 'UA-6516494-19' }
     = csrf_meta_tags
   %body
     #player

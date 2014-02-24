@@ -13,7 +13,7 @@
     = javascript_include_tag "macdonalds/application"
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js", "respond"
-    = render '/layouts/ga'
+    = render partial: '/layouts/ga'
   %body
     - stations = { "hitmusic" => "MCDO1-", "poprock" => "MCDO4-", "legends" => "MCDO2-", "lounge" => "MCDO3-" }
     - default_station_id = params[:station] || stations.first.first
