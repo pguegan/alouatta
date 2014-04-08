@@ -7,6 +7,7 @@ Alouatta::Application.routes.draw do
     end
   end
   get "/", to: "custom#show", defaults: {id: "riffx"}, constraints: {subdomain: "riffx"}
+  get "/", to: "custom#show", defaults: {id: "une-autre-radio"}, constraints: {subdomain: "une-autre-radio"}
   get "/:id", to: "custom#show"
   root to: "stations#index"
 end
