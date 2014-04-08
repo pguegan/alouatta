@@ -1,0 +1,52 @@
+!!! 5
+%html{lang: "fr"}
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}
+    %meta{content: "My Jungly", name: "author"}
+    %meta{content: root_url.chop + image_path("uar/logo.png"), property: 'og:image'}
+    %title Une Autre Radio
+    = stylesheet_link_tag "uar/application"
+    / [if lt IE 9]
+      = javascript_include_tag "html5shiv", "respond"
+    = javascript_include_tag "uar/application"
+    = render partial: "/layouts/ga"
+    = csrf_meta_tags
+  %body
+    #player
+    .outer
+      .middle
+        .container
+          .row.covers
+            .col-lg-12
+              .cover
+                - unless is_autoplay_device?
+                  %a#btn-play{href: "javascript:void(0);"}
+                    %i.fa.fa-play
+                = image_tag "uar/default_cover.jpg", id: "song-cover"
+                %ul.social
+                  %li
+                    %a.btn-share.btn-share-twitter{href: '#', data: {url: request.original_url}}
+                      %i.fa.fa-twitter
+                  %li
+                    %a.btn-share.btn-share-facebook{href: '#', data: {url: request.original_url}}
+                      %i.fa.fa-facebook
+          .row.titles
+            .col-lg-12
+              #song-title
+              #song-artist
+                %i.fa.fa-refresh.fa-spin
+                Chargement...
+          - unless is_mobile_device?
+            .row
+              .col-lg-12
+                .controls
+                  %a.btn-power.active{href: "javascript:void(0);"}
+                    %span.fa-stack
+                      %i.fa.fa-circle.fa-stack-1x
+                      %i.fa.fa-power-off.fa-stack-1x
+                  .volume-bar
+                    #volume.dragdealer
+                      .handle
+                        .cursor
+                    #volume-highlight

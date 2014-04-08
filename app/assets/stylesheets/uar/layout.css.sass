@@ -1,0 +1,170 @@
+$cover-width: 214px
+
+html, body
+  height: 100%
+
+body
+  background-image: url('/assets/uar/background.jpg')
+  background-color: #000
+  background-repeat: no-repeat
+  background-position: top center
+  color: #eee
+
+.outer
+  display: table
+  position: absolute
+  height: 100%
+  width: 100%
+
+.middle
+  vertical-align: middle
+  display: table-cell
+
+.container
+  background-position: center
+  background-repeat: no-repeat
+  text-align: center
+
+img
+  @include img-responsive
+  margin: auto
+  &#song-cover
+    width: $cover-width
+    -webkit-box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
+    box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
+
+.covers
+  margin: 60px 0
+  .cover
+    position: relative
+    width: $cover-width
+    margin: auto
+    a#btn-play
+      position: absolute
+      display: block
+      width: 100%
+      height: 100%
+      color: #fff
+      background-color: rgba(0, 0, 0, 0.5)
+      cursor: pointer
+      z-index: 2000
+      text-align: center
+      padding-top: 60px
+      font-size: 5em
+    ul.social
+      position: absolute
+      list-style: none
+      right: -15px
+      bottom: 10px
+      li
+        margin-bottom: 10px
+        &:last-child
+          margin-bottom: 0
+
+.btn-share
+  display: block
+  width: 30px
+  height: 30px
+  font-size: 1.3em
+  -webkit-box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
+  color: #eee
+  padding-top: 2px
+  &:hover
+    color: #fff
+  &.btn-share-twitter
+    background-color: #4a79bc
+  &.btn-share-facebook
+    background-color: #2d4587
+
+.titles
+  margin: 40px 0
+  #song-title
+    font-family: "HelveticaNeue-Condensed", "HelveticaNeue", Arial, Sans-Serif
+    text-transform: uppercase
+    font-size: 1.6em
+  #song-artist
+    font-family: "HelveticaNeue", Arial, Sans-Serif
+    font-size: 1.2em
+
+header
+  .btn-power
+    position: absolute
+    color: #ddd
+    font-size: 35px
+    left: 50%
+    margin-left: -100px
+    &.active
+      color: #aaa
+      &.btn-power-mobile
+        color: #f47003
+.controls
+  position: relative
+  background-color: #0c0300
+  height: 50px
+  max-width: 345px
+  margin: auto
+  -webkit-border-radius: 5px
+  border-radius: 5px
+  text-align: left
+  padding: 18px 30px 5px 60px
+  line-height: 40px
+  .btn-power
+    position: absolute
+    font-size: 25px
+    top: 5px
+    left: 10px
+    color: #aaa
+    .fa-stack
+      width: 1.6em
+      height: 1.6em
+      line-height: 1.6em
+    .fa-circle.fa-stack-1x
+      color: #4db17e
+      font-size: 1.6em
+    .fa-power-off.fa-stack-1x
+      color: #0c0300
+    &.active
+      .fa-circle.fa-stack-1x
+        color: #e44b50
+.volume-bar
+  #volume-highlight
+    position: absolute
+    background: #4db17e
+    height: 16px
+    top: 18px
+    -webkit-border-radius: 8px 0 0 8px
+    border-radius: 8px 0 0 8px
+  .dragdealer
+    position: relative
+    height: 16px
+    background: #3b2e22
+    -webkit-border-radius: 8px
+    border-radius: 8px
+    .handle
+      z-index: 1000
+      position: absolute
+      cursor: pointer
+      top: -7px
+      width: 30px
+      height: 30px
+      line-height: 30px
+      -webkit-border-radius: 15px
+      border-radius: 15px
+      background-color: #38654e
+
+@media (max-width: $screen-sm-min - 1)
+  .covers
+    margin: 10px 0
+    .cover
+      width: 0.75 * $cover-width
+      a#btn-play
+        padding-top: 30px
+  img#song-cover
+    max-width: 0.75 * $cover-width
+  .titles
+    margin: 25px 0
+    #song-title
+      font-size: 1.3em
+    #song-artist
+      font-size: 1em
