@@ -1,0 +1,56 @@
+!!! 5
+%html{lang: "fr"}
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}
+    %meta{content: "Gulli", name: "author"}
+    %meta{content: root_url.chop + image_path("gulli/logo.png"), property: 'og:image'}
+    %title Radio Gulli
+    = stylesheet_link_tag "gulli/application"
+    / [if lt IE 9]
+      = javascript_include_tag "html5shiv", "respond"
+    = javascript_include_tag "gulli/application"
+    = render partial: "/layouts/ga", locals: { code: 'UA-6516494-19' }
+    = csrf_meta_tags
+  %body
+    #player
+    .outer
+      .middle
+        .container
+          %header.row
+            .col-lg-12
+              - if is_mobile_device?
+                %a.btn-power.btn-power-mobile.active{href: "javascript:void(0);"}
+                  %i.fa.fa-power-off
+              = image_tag "gulli/logo.png"
+          .row.covers
+            .col-lg-12
+              .cover
+                - unless is_autoplay_device?
+                  %a#btn-play{href: "javascript:void(0);"}
+                    %i.fa.fa-play
+                = image_tag "gulli/default_cover.jpg", id: "song-cover"
+                %ul.social
+                  %li
+                    %a.btn-share.btn-share-twitter{href: '#', data: {url: request.original_url}}
+                      %i.fa.fa-twitter
+                  %li
+                    %a.btn-share.btn-share-facebook{href: '#', data: {url: request.original_url}}
+                      %i.fa.fa-facebook
+          .row.titles
+            .col-lg-12
+              #song-title
+              #song-artist
+                %i.fa.fa-refresh.fa-spin
+                Chargement...
+          - unless is_mobile_device?
+            .row
+              .col-lg-12
+                .controls
+                  %a.btn-power.active{href: "javascript:void(0);"}
+                    %i.fa.fa-power-off
+                  .volume-bar
+                    #volume.dragdealer
+                      .handle
+                        .cursor
+                    #volume-highlight
