@@ -18,11 +18,12 @@
     = csrf_meta_tags
   %body
     #player
-    - if is_volume_capable?
-      #volume.dragdealer
-        .handle
-    %a.btn.btn-power{href: "javascript:void(0);", class: is_autoplay_device? && "active"}
-    %a.btn.btn-share{href: "javascript:void(0);"}
+    .hidden-sm.hidden-xs
+      - if is_volume_capable?
+        #volume.dragdealer
+          .handle
+      %a.btn.btn-power{href: "javascript:void(0);", class: is_autoplay_device? && "active"}
+      %a.btn.btn-share{href: "javascript:void(0);"}
     .outer
       .middle
         .container{class: is_volume_capable? ? 'container-with-volume' : 'container-without-volume'}

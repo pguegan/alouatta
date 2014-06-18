@@ -28,7 +28,7 @@ jQuery ->
   ).bind($.jPlayer.event.play, (event) ->
     $('#loading').show()
   ).bind($.jPlayer.event.playing, (event) ->
-    $('#loading').remove()
+    $('#loading').fadeOut()
   )
 
   $('.btn-power').click ->

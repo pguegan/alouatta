@@ -15,7 +15,7 @@ jQuery ->
           $('#song-title-marquee').marquee('destroy')
           if (data.song.title).length > 25
             $('#song-title-marquee').marquee(delayBeforeStart: 0, duplicated: true, gap: 80)
-          $('#song-cover').css('background-image', "url('#{data.song.cover}')")
+          $('#song-cover').css('background-image', "url('#{data.song.cover.replace('\'', '%27')}')")
           etag = xhr.getResponseHeader('ETag')
     })
 
@@ -27,14 +27,14 @@ jQuery ->
       $(this).jPlayer("setMedia", {
         mp3: "http://stream.myjungly.fr/GULLI"
         oga: "http://stream.myjungly.fr/GULLI.ogg"
-      })#.jPlayer("play")
+      }).jPlayer("play")
     supplied: "mp3, oga"
     swfPath: "/assets"
     volume: 0.5
   ).bind($.jPlayer.event.play, (event) ->
     $('#loading').show()
   ).bind($.jPlayer.event.playing, (event) ->
-    $('#loading').hide()
+    $('#loading').fadeOut()
   )
 
   $('.btn-power').click ->
