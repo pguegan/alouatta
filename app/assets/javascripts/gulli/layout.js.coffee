@@ -27,25 +27,25 @@ jQuery ->
       $(this).jPlayer("setMedia", {
         mp3: "http://stream.myjungly.fr/GULLI"
         oga: "http://stream.myjungly.fr/GULLI.ogg"
-      }).jPlayer("play")
+      })#.jPlayer("play")
     supplied: "mp3, oga"
     swfPath: "/assets"
     volume: 0.5
   ).bind($.jPlayer.event.play, (event) ->
     $('#loading').show()
   ).bind($.jPlayer.event.playing, (event) ->
-    $('#loading').remove()
+    $('#loading').hide()
   )
 
-  # $('.btn-power').click ->
-  #   $(this).toggleClass('active')
-  #   if $(this).hasClass('active')
-  #     player.jPlayer("setMedia", {
-  #       mp3: "http://stream.myjungly.fr/GULLI"
-  #       oga: "http://stream.myjungly.fr/GULLI.ogg"
-  #     }).jPlayer("play")
-  #   else
-  #     player.jPlayer("clearMedia").jPlayer("stop")
+  $('.btn-power').click ->
+    $(this).toggleClass('active')
+    if $(this).hasClass('active')
+      player.jPlayer("setMedia", {
+        mp3: "http://stream.myjungly.fr/GULLI"
+        oga: "http://stream.myjungly.fr/GULLI.ogg"
+      }).jPlayer("play")
+    else
+      player.jPlayer("clearMedia").jPlayer("stop")
 
   timer = $.timer( ->
     loadData()
@@ -53,7 +53,6 @@ jQuery ->
   timer.set({ time : 6000, autostart : true }) 
   loadData()
 
-  $('.dragdealer').css('top', $('.volume-bar').offset().top)
   new Dragdealer('volume',
     css3: false
     x: 0.5
@@ -64,12 +63,21 @@ jQuery ->
   )
 
   $(window).resize ->
+    offset = $('.container').offset()
     $('.dragdealer').css('top', $('.volume-bar').offset().top)
-  #   $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px") 
+    $('.btn-power').css('top', offset.top + 245)
+    $('.btn-power').css('left', offset.left + 265)
+    $('.btn-share').css('top', offset.top + 305)
+    $('.btn-share').css('left', offset.left + 672)
+    # $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px") 
+  $(window).trigger('resize')
 
   # $('#btn-play').click ->
   #   player.jPlayer("play")
   #   $(this).fadeOut()
+
+  $(".btn-share").click ->
+    $(this).attr('href', "mailto:?subject=Gulli Radio&body=« #{$.trim($('#song-title').html())} » de #{$.trim($('#song-artist').html())} à écouter sur Gulli Radio, http://gulli.fr/radio.")
 
   # $(".btn-share-facebook").click ->
   #   width  = 575
