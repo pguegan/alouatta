@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.timer
 //= require jquery.jplayer.min
+//= require jquery.marquee
 //= require modernizr
-//= require dragdealer
+//= require dragdealer-0.9.7
 //= require_directory .

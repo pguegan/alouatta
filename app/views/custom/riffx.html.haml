@@ -26,8 +26,10 @@
           .row.covers
             .col-lg-12
               .cover
+                #loading.overlay
+                  %i.fa.fa-refresh.fa-spin
                 - unless is_autoplay_device?
-                  %a#btn-play{href: "javascript:void(0);"}
+                  %a.overlay#btn-play{href: "javascript:void(0);"}
                     %i.fa.fa-play
                 = image_tag "riffx/default_cover.jpg", id: "song-cover"
                 %ul.social

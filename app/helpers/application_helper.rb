@@ -10,4 +10,8 @@ module ApplicationHelper
     !(user_agent.to_s.downcase =~ Regexp.new('ipod|iphone'))
   end
 
+  def is_volume_capable?(user_agent = request.user_agent)
+    !(user_agent.to_s.downcase =~ Regexp.new('ipod|iphone|ipad'))
+  end
+
 end

@@ -14,43 +14,19 @@
     = csrf_meta_tags
   %body
     #player
+    #volume.dragdealer
+      .handle
     .outer
       .middle
-        .container
-          %header.row
-            .col-lg-12
-              - if is_mobile_device?
-                %a.btn-power.btn-power-mobile.active{href: "javascript:void(0);"}
-                  %i.fa.fa-power-off
-              = image_tag "gulli/logo.png"
-          .row.covers
-            .col-lg-12
-              .cover
-                - unless is_autoplay_device?
-                  %a#btn-play{href: "javascript:void(0);"}
-                    %i.fa.fa-play
-                = image_tag "gulli/default_cover.jpg", id: "song-cover"
-                %ul.social
-                  %li
-                    %a.btn-share.btn-share-twitter{href: '#', data: {url: request.original_url}}
-                      %i.fa.fa-twitter
-                  %li
-                    %a.btn-share.btn-share-facebook{href: '#', data: {url: request.original_url}}
-                      %i.fa.fa-facebook
-          .row.titles
-            .col-lg-12
+        .container{class: is_volume_capable? ? 'container-with-volume' : 'container-without-volume'}
+          #song-cover.song-part{style: "background-image: url(\"#{asset_path('gulli/default_cover.jpg')}\");"}
+            #loading.overlay
+              = image_tag "gulli/loader.png", class: "fa-spin"
+          - if is_volume_capable?
+            .volume-bar.song-part
+              #volume-highlight
+          .song-text.song-part
+            #song-title-marquee.marquee
               #song-title
+            #song-artist-marquee.marquee
               #song-artist
-                %i.fa.fa-refresh.fa-spin
-                Chargement...
-          - unless is_mobile_device?
-            .row
-              .col-lg-12
-                .controls
-                  %a.btn-power.active{href: "javascript:void(0);"}
-                    %i.fa.fa-power-off
-                  .volume-bar
-                    #volume.dragdealer
-                      .handle
-                        .cursor
-                    #volume-highlight

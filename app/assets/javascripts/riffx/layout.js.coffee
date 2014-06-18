@@ -25,6 +25,10 @@ jQuery ->
     supplied: "mp3, oga"
     swfPath: "/assets"
     volume: 0.5
+  ).bind($.jPlayer.event.play, (event) ->
+    $('#loading').show()
+  ).bind($.jPlayer.event.playing, (event) ->
+    $('#loading').hide()
   )
 
   $('.btn-power').click ->
@@ -41,12 +45,6 @@ jQuery ->
     loadData()
   )
   timer.set({ time : 6000, autostart : true })
-
-  force_play = $.timer( ->
-    if $(".btn-power").hasClass("active")
-      player.jPlayer("play")
-  )
-  force_play.set({ time : 2000, autostart : true })
 
   new Dragdealer('volume',
     x: 0.5

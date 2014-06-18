@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.18'
 
 gem 'thin'
 gem 'capistrano'
@@ -16,12 +16,14 @@ group :development do
 end
 
 group :assets do
-  gem 'bootstrap-sass'
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'bootstrap-sass',     '3.1.1.0'
+  gem 'font-awesome-sass',  '~> 4.1.0'
+  gem 'sass-rails',         '~> 3.2.3'
+  gem 'coffee-rails',       '~> 3.2.1'
   gem 'execjs'
   gem 'therubyracer', :platforms => :ruby
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier',           '>= 1.0.3'
 end
 
 gem 'debugger', group: [:test, :development]
+
