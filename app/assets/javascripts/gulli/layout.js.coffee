@@ -89,4 +89,4 @@ jQuery ->
   $(window).trigger('resize')
 
   $(".btn-share").click ->
-    $(this).attr('href', "mailto:?subject=Gulli Radio&body=« #{$.trim($('#song-title').html())} » de #{$.trim($('#song-artist').html())} à écouter sur Gulli Radio, http://gulli.fr/radio.").attr('target', '_blank')
+    $(this).attr('href', "mailto:?subject=Gulli Radio&body=« #{$.trim($('#song-title').html())} » de #{$.trim($('#song-artist').html())} à écouter sur Gulli Radio, http://goo.gl/uriJMb.").attr('target', '_blank')
