@@ -17,12 +17,11 @@
     = csrf_meta_tags
   %body
     #player
-    .hidden-sm.hidden-xs
-      - if is_volume_capable?
-        #volume.dragdealer
-          .handle
-      %a.btn.btn-power{href: "javascript:void(0);", class: is_autoplay_device? && "active"}
-      %a.btn.btn-share{href: "javascript:void(0);"}
+    - if is_volume_capable?
+      #volume.dragdealer
+        .handle
+    %a.btn.btn-power{href: "javascript:void(0);", class: is_autoplay_device? && "active"}
+    %a.btn.btn-share{href: "javascript:void(0);"}
     .outer
       .middle
         .container{class: is_volume_capable? ? 'container-with-volume' : 'container-without-volume'}
@@ -31,10 +30,11 @@
             #loading
               = image_tag "gulli/loader.png", class: "fa-spin"
           - if is_volume_capable?
-            .volume-bar.song-part
-              #volume-highlight
+            .volume-control
+              .volume-bar.song-part
+                #volume-highlight
           - else
-            .volume-bar-placeholder
+            .volume-control-placeholder
           .song-text.song-part
             #song-title-marquee.marquee
               #song-title

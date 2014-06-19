@@ -9,6 +9,7 @@ html, body
   background-color: rgba(0, 0, 0, 0.5)
 
 #loading
+  display: none
   position: absolute
   top: 50%
   left: 50%
@@ -18,7 +19,6 @@ html, body
 .outer
   display: table
   position: absolute
-  @include background-cover("/assets/gulli/background.jpg")
   min-height: 100%
   height: 100%
   width: 100%
@@ -32,6 +32,8 @@ html, body
   @include background-cover
   text-align: center
   position: relative
+  padding-left: 0
+  padding-right: 0
 
 .song-part
   position: relative
@@ -41,33 +43,6 @@ html, body
 #song-cover  
   @include background-cover
   @include transition(background-image 2s ease-out)
-
-.volume-bar, .volume-bar-placeholder
-  width: 280px
-  height: 28px
-  top: 178px
-.volume-bar
-  background: #081635
-#volume-highlight
-  background-color: #e0503b
-  position: absolute
-  height: 28px
-  top: 0
-.dragdealer
-  position: absolute
-  width: 280px
-  left: 50%
-  margin-left: -140px
-  height: 28px
-  .handle
-    z-index: 1000
-    position: absolute
-    cursor: pointer
-    top: -7px
-    width: 42px
-    height: 46px
-    line-height: 46px
-    @include background-cover("/assets/gulli/handle.png")
 
 .song-text
   background-image: url('/assets/gulli/song-text-background.jpg')
@@ -84,27 +59,58 @@ html, body
 .btn
   position: absolute
   display: block
-  &:hover
-    transform: scale(1.1)
-    -webkit-transform: scale(1.1)
-    -moz-transform: scale(1.1)
-    -o-transform: scale(1.1)
-    -ms-transform: scale(1.1)
-
-.btn-power
-  width: 78px
-  height: 73px
-  @include transition(background 100ms ease-out)
-  @include background-cover("/assets/gulli/volume-off.png")
-  &.active
-    @include background-cover("/assets/gulli/volume-on.png")
 
 .btn-share
-  width: 115px
-  height: 110px
   @include background-cover("/assets/gulli/share-email.png")
 
+.volume-bar
+  background-color: #081635
+  height: 28px
+  width: 280px
+
+#volume-highlight
+  background-color: #e0503b
+  position: absolute
+  height: 28px
+  top: 0
+
+.dragdealer
+  position: absolute
+  width: 280px
+  left: 50%
+  margin-left: -140px
+  height: 28px
+  .handle
+    z-index: 1000
+    position: absolute
+    cursor: pointer
+    top: -7px
+    width: 42px
+    height: 46px
+    line-height: 46px
+    @include background-cover("/assets/gulli/handle.png")
+
 @media (min-width: $screen-md-min)
+  .outer
+    @include background-cover("/assets/gulli/background-0.jpg")
+  .volume-control-placeholder
+    height: 28px
+  .volume-bar, .volume-control-placeholder
+    top: 178px
+  .btn-power
+    width: 78px
+    height: 73px
+    @include transition(background 100ms ease-out)
+    @include background-cover("/assets/gulli/volume-off-md.png")
+    &.active
+      @include background-cover("/assets/gulli/volume-on-md.png")
+    &:hover
+      @include transform(scale(1.1))
+  .btn-share
+    width: 115px
+    height: 110px
+    &:hover
+      @include transform(scale(1.1))
   .container
     width: 1024px
     height: 668px
@@ -125,22 +131,45 @@ html, body
     .marquee
       height: 28px
 @media (max-width: $screen-md-min - 1)
+  .outer
+    @include background-cover("/assets/gulli/background-1.jpg")
+  .btn-power
+    width: 50px
+    height: 50px
+    @include background-cover("/assets/gulli/volume-off-sm.png")
+    &.active
+      @include background-cover("/assets/gulli/volume-on-sm.png")
+  .btn-share
+    width: 65px
+    height: 62px
+    &:hover
+      @include transform(scale(1.1))
   .container
     width: 320px
     height: 568px
     background-image: url('/assets/gulli/container-sm.png')
+    .volume-control
+      position: absolute
+      @include background-cover("/assets/gulli/volume-bar-sm.png")
+      width: 320px
+      height: 70px
+      bottom: 0
+      -webkit-border-radius: 4px
+      -moz-border-radius: 4px
+      border-radius: 4px
     .volume-bar
-      display: none
+      
+      top: 18px
   #song-cover
-    width: 205px
-    height: 205px
+    width: 202px
+    height: 202px
     top: 90px
     left: 3px
   .song-text
     width: 250px
     height: 70px
     top: 118px
-    padding-top: 10px
+    padding-top: 12px
     font-size: 16px
     .marquee
-      height: 22px
+      height: 24px

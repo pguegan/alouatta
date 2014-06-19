@@ -54,32 +54,39 @@ jQuery ->
   timer = $.timer( ->
     loadData()
   )
-  timer.set({ time : 6000, autostart : true }) 
+  timer.set({ time: 6000, autostart: true }) 
   loadData()
 
-  new Dragdealer('volume',
+  drag = new Dragdealer('volume',
     css3: false
     x: 0.5
     callback: (x, y) ->
       player.jPlayer("volume", x)
     animationCallback: (x, y) ->
-      $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + (x * parseInt($('.handle').css('width'))) + "px")
+      left = parseInt($('.handle').css('left'))
+      width = parseInt($('.handle').css('width'))
+      $("#volume-highlight").css("width", left + width / 2 + "px")
   )
 
   $(window).resize ->
     $('.dragdealer').css('top', $('.volume-bar').offset().top) if $('.volume-bar').length > 0
+    
+    left = parseInt($('.handle').css('left'))
+    width = parseInt($('.handle').css('width'))
+    $("#volume-highlight").css("width", left + width / 2 + "px")
+    
     offset = $('.container').offset()
-    $('.btn-power').css('top', offset.top + 245)
-    $('.btn-power').css('left', offset.left + 265)
-    $('.btn-share').css('top', offset.top + 305)
-    $('.btn-share').css('left', offset.left + 672)
-    # $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px") 
+    if $(window).width() > 991
+      $('.btn-power').css('top', offset.top + 245)
+      $('.btn-power').css('left', offset.left + 265)
+      $('.btn-share').css('top', offset.top + 305)
+      $('.btn-share').css('left', offset.left + 672)
+    else
+      $('.btn-power').css('top', offset.top + 30)
+      $('.btn-power').css('left', offset.left + 20)
+      $('.btn-share').css('top', offset.top + 259)
+      $('.btn-share').css('left', offset.left + 251)
   $(window).trigger('resize')
-  
-
-  # $('#btn-play').click ->
-  #   player.jPlayer("play")
-  #   $(this).fadeOut()
 
   $(".btn-share").click ->
-    $(this).attr('href', "mailto:?subject=Gulli Radio&body=« #{$.trim($('#song-title').html())} » de #{$.trim($('#song-artist').html())} à écouter sur Gulli Radio, http://gulli.fr/radio.")
+    $(this).attr('href', "mailto:?subject=Gulli Radio&body=« #{$.trim($('#song-title').html())} » de #{$.trim($('#song-artist').html())} à écouter sur Gulli Radio, http://gulli.fr/radio.").attr('target', '_blank')

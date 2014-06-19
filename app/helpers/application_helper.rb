@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def is_autoplay_device?(user_agent = request.user_agent)
-    !(user_agent.to_s.downcase =~ Regexp.new('ipod|iphone'))
+    !(user_agent.to_s.downcase =~ Regexp.new('ipod|iphone|android'))
   end
 
   def is_volume_capable?(user_agent = request.user_agent)
