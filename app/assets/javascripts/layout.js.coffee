@@ -25,7 +25,7 @@ jQuery ->
             etag = xhr.getResponseHeader('ETag')
       })
     )
-    timer.set({ time : 6000, autostart : true })
+    timer.set({ time : 8000, autostart : true })
 
     $("a#switch").click ->
       position = $(this).attr("class")

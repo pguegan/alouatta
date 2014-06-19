@@ -100,12 +100,14 @@ html, body
   .btn-power
     width: 78px
     height: 73px
-    @include transition(background 100ms ease-out)
+    @include transition(background 200ms ease-out)
     @include background-cover("/assets/gulli/volume-off-md.png")
+    @include transform(scale(0.8))
     &.active
+      @include transform(scale(1))
       @include background-cover("/assets/gulli/volume-on-md.png")
-    &:hover
-      @include transform(scale(1.1))
+      &:hover
+        @include background-cover("/assets/gulli/volume-hover-md.png")
   .btn-share
     width: 115px
     height: 110px
@@ -132,6 +134,7 @@ html, body
     font-size: 20px
     .marquee
       height: 28px
+
 @media (max-width: $screen-sm-max)
   .outer
     @include background-cover("/assets/gulli/background-1.jpg")
