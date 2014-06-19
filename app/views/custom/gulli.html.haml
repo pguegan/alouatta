@@ -27,7 +27,8 @@
       .middle
         .container{class: is_volume_capable? ? 'container-with-volume' : 'container-without-volume'}
           #song-cover.song-part{style: "background-image: url(\"#{asset_path('gulli/default_cover.jpg')}\");"}
-            #loading.overlay
+            #overlay
+            #loading
               = image_tag "gulli/loader.png", class: "fa-spin"
           - if is_volume_capable?
             .volume-bar.song-part

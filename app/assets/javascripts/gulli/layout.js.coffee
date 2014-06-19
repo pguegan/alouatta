@@ -32,8 +32,10 @@ jQuery ->
     swfPath: "/assets"
     volume: 0.5
   ).bind($.jPlayer.event.play, (event) ->
+    $('#overlay').show()
     $('#loading').show()
   ).bind($.jPlayer.event.playing, (event) ->
+    $('#overlay').fadeOut()
     $('#loading').fadeOut()
   )
 
@@ -46,6 +48,8 @@ jQuery ->
       }).jPlayer("play")
     else
       player.jPlayer("clearMedia").jPlayer("stop")
+      $('#overlay').show()
+      $('#loading').hide()
 
   timer = $.timer( ->
     loadData()
@@ -63,14 +67,15 @@ jQuery ->
   )
 
   $(window).resize ->
+    $('.dragdealer').css('top', $('.volume-bar').offset().top) if $('.volume-bar').length > 0
     offset = $('.container').offset()
-    $('.dragdealer').css('top', $('.volume-bar').offset().top)
     $('.btn-power').css('top', offset.top + 245)
     $('.btn-power').css('left', offset.left + 265)
     $('.btn-share').css('top', offset.top + 305)
     $('.btn-share').css('left', offset.left + 672)
     # $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px") 
   $(window).trigger('resize')
+  
 
   # $('#btn-play').click ->
   #   player.jPlayer("play")
@@ -78,26 +83,3 @@ jQuery ->
 
   $(".btn-share").click ->
     $(this).attr('href', "mailto:?subject=Gulli Radio&body=« #{$.trim($('#song-title').html())} » de #{$.trim($('#song-artist').html())} à écouter sur Gulli Radio, http://gulli.fr/radio.")
-
-  # $(".btn-share-facebook").click ->
-  #   width  = 575
-  #   height = 400
-  #   left   = ($(window).width()  - width)  / 2
-  #   top    = ($(window).height() - height) / 2
-  #   opts   = 'status=1,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left
-  #   title  = "Web Radio Gulli"
-  #   url    = 'http://www.gulli.fr'
-  #   text   = "J'écoute #{$.trim($('#song-title').html())} de #{$.trim($('#song-artist').html())} sur radio Gulli. #{url}"
-  #   window.open("https://www.facebook.com/sharer/sharer.php?s=100&p%5Burl%5Du=#{encodeURIComponent(url)}&p%5Btitle%5D=#{encodeURIComponent(title)}&p%5Bsummary%5D=#{encodeURIComponent(text)}&p%5Bimages%5D%5B0%5D=#{encodeURIComponent($('#song-cover').attr('src'))}", 'facebook-share-dialog', opts)
-  #   false
-
-  # $(".btn-share-twitter").click ->
-  #   width  = 575
-  #   height = 400
-  #   left   = ($(window).width()  - width)  / 2
-  #   top    = ($(window).height() - height) / 2
-  #   opts   = 'status=1,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left
-  #   url    = 'http://www.gulli.fr'
-  #   text   = "J'écoute #{$.trim($('#song-title').html())} de #{$.trim($('#song-artist').html())} sur radio Gulli."
-  #   window.open("https://twitter.com/share?url=#{encodeURIComponent(url)}&text=#{encodeURIComponent(text)}", 'twitter', opts)
-  #   false
