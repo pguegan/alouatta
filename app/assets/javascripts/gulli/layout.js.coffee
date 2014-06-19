@@ -76,7 +76,7 @@ jQuery ->
     $("#volume-highlight").css("width", left + width / 2 + "px")
     
     offset = $('.container').offset()
-    if $(window).width() > 991
+    if $(window).width() > 849
       $('.btn-power').css('top', offset.top + 245)
       $('.btn-power').css('left', offset.left + 265)
       $('.btn-share').css('top', offset.top + 305)

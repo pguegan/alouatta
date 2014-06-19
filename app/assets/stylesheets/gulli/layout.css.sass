@@ -114,6 +114,8 @@ html, body
   .container
     width: 1024px
     height: 668px
+    left: 50%
+    margin-left: -512px
     &.container-without-volume
       background-image: url('/assets/gulli/container-md-without-volume.png')
     &.container-with-volume
@@ -130,7 +132,7 @@ html, body
     font-size: 20px
     .marquee
       height: 28px
-@media (max-width: $screen-md-min - 1)
+@media (max-width: $screen-sm-max)
   .outer
     @include background-cover("/assets/gulli/background-1.jpg")
   .btn-power
