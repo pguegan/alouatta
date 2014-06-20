@@ -60,6 +60,12 @@ html, body
   position: absolute
   display: block
 
+.btn-power
+  @include transition(background 200ms ease-out)
+  @include transform(scale(0.8))
+  &.active
+    @include transform(scale(1))
+
 .btn-share
   @include background-cover("/assets/gulli/share-email.png")
 
@@ -100,11 +106,8 @@ html, body
   .btn-power
     width: 78px
     height: 73px
-    @include transition(background 200ms ease-out)
     @include background-cover("/assets/gulli/volume-off-md.png")
-    @include transform(scale(0.8))
     &.active
-      @include transform(scale(1))
       @include background-cover("/assets/gulli/volume-on-md.png")
       &:hover
         @include background-cover("/assets/gulli/volume-hover-md.png")
@@ -140,7 +143,7 @@ html, body
     @include background-cover("/assets/gulli/background-1.jpg")
   .btn-power
     width: 50px
-    height: 50px
+    height: 48px
     @include background-cover("/assets/gulli/volume-off-sm.png")
     &.active
       @include background-cover("/assets/gulli/volume-on-sm.png")
@@ -163,7 +166,6 @@ html, body
       -moz-border-radius: 4px
       border-radius: 4px
     .volume-bar
-      
       top: 18px
   #song-cover
     width: 202px
