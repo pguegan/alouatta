@@ -1,108 +1,182 @@
-body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, fieldset, legend, label, input, textarea
-  margin: 0
-  padding: 0
-  border: 0
-
 html, body
-  background-color: #000
-  height: 416px
-  color: #fff
-  font-family: Arial, Helvetica, Sans-Serif
+  height: 100%
 
-.stations
-  text-align: center
-  margin-top: 20px
+#overlay
+  position: relative
+  display: block
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.5)
 
-.station
-  a
-    margin-top: 10px
-    font-size: 30px
-    display: inline-block
-    padding: 10px
-    line-height: 40px
-    width: 319px
-    height: 40px
-    border: 1px solid #aaa
-    color: #aaa
-    text-decoration: none
-    &:visited
-      color: #aaa
-    &:hover
-      color: #fff
-      border: 1px solid #fff
-
-#player
+#loading
+  display: none
   position: absolute
-  width: 320px
-  height: 416px
-  background: url(background.jpg) no-repeat scroll
-  background-size: cover
-  -webkit-background-size: cover
-  -moz-background-size: cover
-  -o-background-size: cover
-  .header
+  top: 50%
+  left: 50%
+  margin-top: -29px
+  margin-left: -29px
+
+.outer
+  display: table
+  position: absolute
+  min-height: 100%
+  height: 100%
+  width: 100%
+  z-index: -2
+
+.middle
+  vertical-align: middle
+  display: table-cell
+
+.container
+  @include background-cover
+  text-align: center
+  position: relative
+  padding-left: 0
+  padding-right: 0
+
+.song-part
+  position: relative
+  margin: 0 auto
+  z-index: -1
+
+#song-cover  
+  @include background-cover
+  @include transition(background-image 2s ease-out)
+
+.song-text
+  background-image: url('/assets/uar/song-text-background.jpg')
+  color: #9ed066
+  overflow: hidden
+  white-space: nowrap
+  box-sizing: border-box
+  #song-title
+    font-family: 'panorama_regular'
+    text-transform: uppercase
+  #song-artist
+    font-family: 'panorama_black'
+
+.btn
+  position: absolute
+  display: block
+
+.btn-power
+  @include transition(background 200ms ease-out)
+  @include transform(scale(0.8))
+  &.active
+    @include transform(scale(1))
+
+.btn-share
+  @include background-cover("/assets/uar/share-email.png")
+
+.volume-bar
+  background-color: #081635
+  height: 28px
+  width: 280px
+
+#volume-highlight
+  background-color: #e0503b
+  position: absolute
+  height: 28px
+  top: 0
+
+.dragdealer
+  position: absolute
+  width: 280px
+  left: 50%
+  margin-left: -140px
+  height: 28px
+  .handle
+    z-index: 1000
     position: absolute
-    top: 0
-    background: url(header.png) top center no-repeat
+    cursor: pointer
+    top: -7px
+    width: 42px
+    height: 46px
+    line-height: 46px
+    @include background-cover("/assets/uar/handle.png")
+
+@media (min-width: $screen-md-min)
+  .outer
+    @include background-cover("/assets/uar/background-0.jpg")
+  .volume-control-placeholder
+    height: 28px
+  .volume-bar, .volume-control-placeholder
+    top: 178px
+  .btn-power
+    width: 78px
+    height: 73px
+    @include background-cover("/assets/uar/volume-off-md.png")
+    &.active
+      @include background-cover("/assets/uar/volume-on-md.png")
+      &:hover
+        @include background-cover("/assets/uar/volume-hover-md.png")
+  .btn-share
+    width: 115px
+    height: 110px
+    &:hover
+      @include transform(scale(1.1))
+  .container
+    width: 1024px
+    height: 668px
+    left: 50%
+    margin-left: -512px
+    &.container-without-volume
+      background-image: url('/assets/uar/container-md-without-volume.png')
+    &.container-with-volume
+      background-image: url('/assets/uar/container-md-with-volume.png')
+  #song-cover
+    width: 253px
+    height: 253px
+    top: 158px
+  .song-text
     width: 320px
-    height: 60px
-  .footer
-    position: absolute
-    bottom: 0
-    background: url(footer.png) bottom center no-repeat
+    height: 85px
+    top: 188px
+    padding-top: 16px
+    font-size: 20px
+    .marquee
+      height: 28px
+
+@media (max-width: $screen-sm-max)
+  .outer
+    @include background-cover("/assets/uar/background-1.jpg")
+  .btn-power
+    width: 50px
+    height: 48px
+    @include background-cover("/assets/uar/volume-off-sm.png")
+    &.active
+      @include background-cover("/assets/uar/volume-on-sm.png")
+  .btn-share
+    width: 65px
+    height: 62px
+    &:hover
+      @include transform(scale(1.1))
+  .container
     width: 320px
-    height: 99px
-    a#switch
-      display: block
+    height: 568px
+    background-image: url('/assets/uar/container-sm.png')
+    .volume-control
       position: absolute
-      bottom: 55px
-      left: 10px
-      width: 26px
-      height: 26px
-      text-indent: -1000px
-      &.on
-        background-image: url(switch-on.png)
-      &.off
-        background-image: url(switch-off.png)
-    .volume-bar
-      position: absolute
-      bottom: 15px
+      @include background-cover("/assets/uar/volume-bar-sm.png")
       width: 320px
-      height: 16px
-      background-color: transparent
-      background-image: url(volume-bar.png)
-      background-repeat: no-repeat
-      #volume-highligth
-        display: none
-  .social
-    display: none
-  .cover
-    position: relative
-    top: 80px
-    text-align: center
-    img
-      text-align: center
-      width: 200px
-      height: 200px
-  .status
-    position: relative
-    top: 75px
-    left: 60px
-    width: 190px
-    height: 15px
-    padding: 5px
-    background-color: #82734d
-    font-size: 13px
-  .dragdealer
-    width: 255px
-    padding-left: 60px
-    .handle
-      position: absolute
-      cursor: pointer
-      margin-top: -7px
-      .cursor
-        width: 40px
-        height: 23px
-        background-image: url(volume-cursor.png)
-    .disabled
-      background: #898989
+      height: 70px
+      bottom: 0
+      -webkit-border-radius: 4px
+      -moz-border-radius: 4px
+      border-radius: 4px
+    .volume-bar
+      top: 18px
+  #song-cover
+    width: 202px
+    height: 202px
+    top: 90px
+    left: 3px
+  .song-text
+    width: 250px
+    height: 70px
+    top: 118px
+    padding-top: 12px
+    font-size: 16px
+    .marquee
+      height: 24px

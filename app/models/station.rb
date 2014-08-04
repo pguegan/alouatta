@@ -65,6 +65,8 @@ private
       "/assets/riffx/default_cover.jpg"
     elsif @name == "GULLI"
       "/assets/gulli/default_cover.jpg"
+    elsif @name == "UNE-AUTRE-RADIO"
+      "/assets/uar/default_cover.jpg"
     else
       "/assets/default.jpg"
     end

@@ -1,71 +1,152 @@
-$cover-width: 214px
-
 html, body
   height: 100%
 
 body
-  background-image: url('/assets/uar/background.jpg')
-  background-color: #000
-  background-repeat: no-repeat
-  background-position: top center
-  color: #eee
+  font-family: Helvetica, Arial, Sans-Serif
+  color: #000
+
+#overlay
+  position: relative
+  display: block
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.75)
 
 .outer
   display: table
   position: absolute
+  min-height: 100%
   height: 100%
   width: 100%
+  @include background-cover("/assets/uar/background.jpg")
 
 .middle
   vertical-align: middle
   display: table-cell
 
 .container
-  background-position: center
-  background-repeat: no-repeat
   text-align: center
+  position: relative
+  padding-left: 0
+  padding-right: 0
+  padding-bottom: 20px
 
-img
-  @include img-responsive
-  margin: auto
-  &#song-cover
-    width: $cover-width
-    -webkit-box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
-    box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
+.song-part
+  position: relative
+  margin: 0 auto
 
-.covers
-  margin: 60px 0
-  .cover
+$song-cover-border-size: 11px
+$song-cover-border-depth: 15px
+#song-cover
+  @include background-cover
+  @include transition(background-image 2s ease-out)
+  margin-bottom: 40px
+  border: $song-cover-border-size solid #812985
+  width: 280px
+  height: 280px
+  &:after
+    content: ""  
+    border-top: $song-cover-border-depth solid #221e62
+    border-left: $song-cover-border-depth solid transparent
+    border-right: $song-cover-border-depth solid transparent
+    width: 280px
+    bottom: - ($song-cover-border-depth + $song-cover-border-size)
+    position: absolute
+    left: -$song-cover-border-size
+
+#btn-play
+  color: #43a46c
+  font-size: 100px
+  position: absolute
+  top: 50%
+  left: 50%
+  margin-left: -32px
+  margin-top: -70px
+
+.song-text
+  font-size: 24px
+  #song-title
+    text-transform: uppercase
+    font-weight: bold
+
+.song-controls
+  position: relative
+  background-color: #812985
+  height: 60px
+  max-width: 400px
+  text-align: left
+  padding: 23px 30px 5px 80px
+  line-height: 40px
+  margin: 40px auto auto auto
+  &:after
+    content: ""
+    border-top: 8px solid #221e62
+    border-left: 8px solid transparent
+    border-right: 8px solid transparent
+    width: 400px
+    bottom: -8px
+    left: 0
+    position: absolute
+
+.btn-power
+  position: absolute
+  top: 10px
+  left: 20px
+  font-size: 26px
+  color: #221e62
+  display: block
+  width: 40px
+  height: 40px
+  text-align: center
+  -webkit-border-radius: 20px
+  border-radius: 20px
+  background-color: #e95a2d
+  @include transition(background-color 0.3s)
+  &.active
+    background-color: #43a46c
+
+.volume-bar
+  #volume-highlight
+    position: absolute
+    background: #fdd237
+    height: 16px
+    top: 23px
+    -webkit-border-radius: 8px 0 0 8px
+    border-radius: 8px 0 0 8px
+  .dragdealer
     position: relative
-    width: $cover-width
-    margin: auto
-    a#btn-play
+    height: 16px
+    background: #221e62
+    -webkit-border-radius: 8px
+    border-radius: 8px
+    .handle
+      z-index: 1000
       position: absolute
-      display: block
-      width: 100%
-      height: 100%
-      color: #fff
-      background-color: rgba(0, 0, 0, 0.5)
       cursor: pointer
-      z-index: 2000
-      text-align: center
-      padding-top: 60px
-      font-size: 5em
-    ul.social
-      position: absolute
-      list-style: none
-      right: -15px
-      bottom: 10px
-      li
-        margin-bottom: 10px
-        &:last-child
-          margin-bottom: 0
+      top: -10px
+      width: 36px
+      height: 36px
+      line-height: 36px
+      -webkit-border-radius: 18px
+      border-radius: 18px
+      background-color: #e95a2d
+
+ul.social
+  position: absolute
+  list-style: none
+  right: -20px
+  bottom: 10px
+  li
+    margin-bottom: 10px
+    &:last-child
+      margin-bottom: 0
 
 .btn-share
   display: block
-  width: 30px
-  height: 30px
-  font-size: 1.3em
+  width: 34px
+  height: 34px
+  line-height: 34px
+  font-size: 20px
   -webkit-box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
   box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5)
   color: #eee
@@ -77,94 +158,44 @@ img
   &.btn-share-facebook
     background-color: #2d4587
 
-.titles
-  margin: 40px 0
-  #song-title
-    font-family: "HelveticaNeue-Condensed", "HelveticaNeue", Arial, Sans-Serif
-    text-transform: uppercase
-    font-size: 1.6em
-  #song-artist
-    font-family: "HelveticaNeue", Arial, Sans-Serif
-    font-size: 1.2em
-
-header
-  .btn-power
-    position: absolute
-    color: #ddd
-    font-size: 35px
-    left: 50%
-    margin-left: -100px
-    &.active
-      color: #aaa
-      &.btn-power-mobile
-        color: #f47003
-.controls
-  position: relative
-  background-color: #0c0300
-  height: 50px
-  max-width: 345px
-  margin: auto
-  -webkit-border-radius: 5px
-  border-radius: 5px
-  text-align: left
-  padding: 18px 30px 5px 60px
-  line-height: 40px
-  .btn-power
-    position: absolute
-    font-size: 25px
-    top: 5px
-    left: 10px
-    color: #aaa
-    .fa-stack
-      width: 1.6em
-      height: 1.6em
-      line-height: 1.6em
-    .fa-circle.fa-stack-1x
-      color: #4db17e
-      font-size: 1.6em
-    .fa-power-off.fa-stack-1x
-      color: #0c0300
-    &.active
-      .fa-circle.fa-stack-1x
-        color: #e44b50
-.volume-bar
-  #volume-highlight
-    position: absolute
-    background: #4db17e
-    height: 16px
-    top: 18px
-    -webkit-border-radius: 8px 0 0 8px
-    border-radius: 8px 0 0 8px
-  .dragdealer
-    position: relative
-    height: 16px
-    background: #3b2e22
-    -webkit-border-radius: 8px
-    border-radius: 8px
-    .handle
-      z-index: 1000
-      position: absolute
-      cursor: pointer
-      top: -7px
-      width: 30px
-      height: 30px
-      line-height: 30px
-      -webkit-border-radius: 15px
-      border-radius: 15px
-      background-color: #38654e
-
-@media (max-width: $screen-sm-min - 1)
-  .covers
-    margin: 10px 0
-    .cover
-      width: 0.75 * $cover-width
-      a#btn-play
-        padding-top: 30px
-  img#song-cover
-    max-width: 0.75 * $cover-width
-  .titles
-    margin: 25px 0
-    #song-title
-      font-size: 1.3em
-    #song-artist
-      font-size: 1em
+@media (min-width: $screen-lg-min)
+  .container
+    padding-top: 240px
+@media (min-width: $screen-sm-min)
+  .outer
+    &.outer-desktop
+      .middle
+        vertical-align: middle
+    .container
+      @include background-contain("/assets/uar/container-md.png")
+      padding-top: 350px
+      padding-left: 55px
+      margin-top: -150px
+      left: -55px
+@media (max-width: $screen-xs-max)
+  .outer
+    &.outer-desktop
+      .container
+        @include background-contain("/assets/uar/container-sm-desktop.png")
+        padding-top: 50%
+        background-position: center top
+    &.outer-mobile
+      .container
+        background-image: url("/assets/uar/container-sm-mobile.png")
+        background-size: auto
+        background-repeat: no-repeat
+        background-position: center top
+        padding-top: 100px
+      #song-cover
+        width: 180px
+        height: 180px
+        margin-bottom: 25px
+        &:after
+          width: 180px
+      .song-text
+        font-size: 16px
+      .btn-power
+        display: none
+        bottom: 0
+    .middle
+      vertical-align: top

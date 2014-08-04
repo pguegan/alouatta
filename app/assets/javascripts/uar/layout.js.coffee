@@ -1,5 +1,5 @@
 jQuery ->
-    
+
   etag = null
   loadData = ->
     $.ajax({
@@ -8,8 +8,14 @@ jQuery ->
       success: (data, status, xhr) ->
         if xhr.status == 200
           $('#song-artist').html(data.song.artist)
+          $('#song-artist-marquee').marquee('destroy')
+          if (data.song.artist).length > 20
+            $('#song-artist-marquee').marquee(delayBeforeStart: 0, duplicated: true, gap: 80)
           $('#song-title').html(data.song.title)
-          $('#song-cover').attr('src', data.song.cover)
+          $('#song-title-marquee').marquee('destroy')
+          if (data.song.title).length > 25
+            $('#song-title-marquee').marquee(delayBeforeStart: 0, duplicated: true, gap: 80)
+          $('#song-cover').css('background-image', "url('#{data.song.cover.replace('\'', '%27')}')")
           etag = xhr.getResponseHeader('ETag')
     })
 
@@ -20,11 +26,17 @@ jQuery ->
     ready: ->
       $(this).jPlayer("setMedia", {
         mp3: "http://stream.myjungly.fr/UNE-AUTRE-RADIO"
-        oga: "http://stream.myjungly.fr/UNE-AUTRE-RADIO.ogg"
+        #oga: "http://stream.myjungly.fr/UNE-AUTRE-RADIO.ogg"
       }).jPlayer("play")
-    supplied: "mp3, oga"
+    supplied: "mp3" #, oga"
     swfPath: "/assets"
     volume: 0.5
+  ).bind($.jPlayer.event.play, (event) ->
+    $('#overlay').show()
+    $('#loading').show()
+  ).bind($.jPlayer.event.playing, (event) ->
+    $('#overlay').fadeOut()
+    $('#loading').fadeOut()
   )
 
   $('.btn-power').click ->
@@ -32,38 +44,39 @@ jQuery ->
     if $(this).hasClass('active')
       player.jPlayer("setMedia", {
         mp3: "http://stream.myjungly.fr/UNE-AUTRE-RADIO"
-        oga: "http://stream.myjungly.fr/UNE-AUTRE-RADIO.ogg"
+        #oga: "http://stream.myjungly.fr/UNE-AUTRE-RADIO.ogg"
       }).jPlayer("play")
     else
       player.jPlayer("clearMedia").jPlayer("stop")
+      $('#overlay').show()
+      $('#loading').hide()
 
   timer = $.timer( ->
-    loadData()
+   loadData()
   )
-  timer.set({ time : 6000, autostart : true })
-
-  force_play = $.timer( ->
-    if $(".btn-power").hasClass("active")
-      player.jPlayer("play")
-  )
-  force_play.set({ time : 2000, autostart : true })
-
-  new Dragdealer('volume',
-    x: 0.5
-    callback: (x, y) ->
-      player.jPlayer("volume", x)
-    animationCallback: (x, y) ->
-      $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px")
-  )
-
-  $(window).resize ->
-    $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px") 
+  timer.set({ time: 6000, autostart: true })
+  loadData()
 
   $('#btn-play').click ->
     player.jPlayer("play")
     $(this).fadeOut()
+    $(".btn-power").fadeIn()
 
-  loadData()
+  drag = new Dragdealer('volume',
+    css3: false
+    x: 0.5
+    animationCallback: (x, y) ->
+      player.jPlayer("volume", x)
+      left = parseInt($('.handle').css('left'))
+      width = parseInt($('.handle').css('width'))
+      $("#volume-highlight").css("width", left + width / 2 + "px")
+  )
+
+  $(window).resize ->
+    left = parseInt($('.handle').css('left'))
+    width = parseInt($('.handle').css('width'))
+    $("#volume-highlight").css("width", left + width / 2 + "px")
+  $(window).trigger('resize')
 
   $(".btn-share-facebook").click ->
     width  = 575

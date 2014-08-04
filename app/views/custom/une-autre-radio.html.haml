@@ -3,8 +3,8 @@
   %head
     %meta{charset: 'utf-8'}
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}
-    %meta{content: "My Jungly", name: "author"}
-    %meta{content: root_url.chop + image_path("uar/logo.png"), property: 'og:image'}
+    %meta{content: "Une Autre Radio", name: "author"}
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}
     %title Une Autre Radio
     = stylesheet_link_tag "uar/application"
     / [if lt IE 9]
@@ -14,39 +14,38 @@
     = csrf_meta_tags
   %body
     #player
-    .outer
+    .outer{class: is_mobile_device? ? 'outer-mobile' : 'outer-desktop'}
       .middle
         .container
-          .row.covers
-            .col-lg-12
-              .cover
-                - unless is_autoplay_device?
-                  %a#btn-play{href: "javascript:void(0);"}
-                    %i.fa.fa-play
-                = image_tag "uar/default_cover.jpg", id: "song-cover"
-                %ul.social
-                  %li
-                    %a.btn-share.btn-share-twitter{href: '#', data: {url: request.original_url}}
-                      %i.fa.fa-twitter
-                  %li
-                    %a.btn-share.btn-share-facebook{href: '#', data: {url: request.original_url}}
-                      %i.fa.fa-facebook
-          .row.titles
-            .col-lg-12
-              #song-title
-              #song-artist
-                %i.fa.fa-refresh.fa-spin
-                Chargement...
-          - unless is_mobile_device?
-            .row
-              .col-lg-12
-                .controls
-                  %a.btn-power.active{href: "javascript:void(0);"}
-                    %span.fa-stack
-                      %i.fa.fa-circle.fa-stack-1x
-                      %i.fa.fa-power-off.fa-stack-1x
-                  .volume-bar
-                    #volume.dragdealer
-                      .handle
-                        .cursor
-                    #volume-highlight
+          #song-cover.song-part{style: "background-image: url(\"#{asset_path('uar/default_cover.jpg')}\");"}
+            #overlay
+            - unless is_autoplay_device?
+              %a#btn-play{href: "javascript:void(0);"}
+                %i.fa.fa-play
+            #loading
+              - (1..8).each do |i|
+                .f_circleG{id: "frotateG_0#{i}"}
+            %ul.social
+              %li
+                %a.btn-share.btn-share-twitter{href: "javascript:void(0);", data: {url: request.original_url}}
+                  %i.fa.fa-twitter
+              %li
+                %a.btn-share.btn-share-facebook{href: "javascript:void(0);", data: {url: request.original_url}}
+                  %i.fa.fa-facebook
+          .song-text.song-part
+            - unless is_volume_capable?
+              %a.btn-power.active{href: "javascript:void(0);"}
+                %i.fa.fa-power-off
+            #song-title
+              %i.fa.fa-spinner.fa-spin
+            #song-artist
+              Chargement...
+          - if is_volume_capable?
+            .song-controls
+              %a.btn-power.active{href: "javascript:void(0);"}
+                %i.fa.fa-power-off
+              .volume-bar
+                #volume.dragdealer
+                  .handle
+                    .cursor
+                #volume-highlight

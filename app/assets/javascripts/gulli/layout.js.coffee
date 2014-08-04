@@ -26,9 +26,9 @@ jQuery ->
     ready: ->
       $(this).jPlayer("setMedia", {
         mp3: "http://stream.myjungly.fr/GULLI"
-        oga: "http://stream.myjungly.fr/GULLI.ogg"
+        #oga: "http://stream.myjungly.fr/GULLI.ogg"
       }).jPlayer("play")
-    supplied: "mp3, oga"
+    supplied: "mp3" #, oga"
     swfPath: "/assets"
     volume: 0.5
   ).bind($.jPlayer.event.play, (event) ->
@@ -44,7 +44,7 @@ jQuery ->
     if $(this).hasClass('active')
       player.jPlayer("setMedia", {
         mp3: "http://stream.myjungly.fr/GULLI"
-        oga: "http://stream.myjungly.fr/GULLI.ogg"
+        #oga: "http://stream.myjungly.fr/GULLI.ogg"
       }).jPlayer("play")
     else
       player.jPlayer("clearMedia").jPlayer("stop")
@@ -60,9 +60,8 @@ jQuery ->
   drag = new Dragdealer('volume',
     css3: false
     x: 0.5
-    callback: (x, y) ->
-      player.jPlayer("volume", x)
     animationCallback: (x, y) ->
+      player.jPlayer("volume", x)
       left = parseInt($('.handle').css('left'))
       width = parseInt($('.handle').css('width'))
       $("#volume-highlight").css("width", left + width / 2 + "px")
