@@ -10,8 +10,8 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "philippe.guegan@nas.decam.fr:#{git_repository}.git"
-#set :repository, "git@github.com:pguegan/#{git_repository}.git"
+#set :repository, "philippe.guegan@nas.decam.fr:#{git_repository}.git"
+set :repository, "git@github.com:pguegan/#{git_repository}.git"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
