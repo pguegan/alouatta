@@ -1,16 +1,16 @@
 jQuery ->
 
-  #etag = null
+  etag = null
   loadData = ->
     $.ajax({
       url: "/stations/UNE-AUTRE-RADIO/status.json"
-      #headers: { "If-None-Match": etag }
+      headers: { "If-None-Match": etag }
       success: (data, status, xhr) ->
-        #if xhr.status == 200
-        $('#song-artist').html('Lorem ipsum Pariatur nostrud amet elit ut dolor eiusmod ut Duis.') #data.song.artist)
-        $('#song-title').html('Lorem ipsum Mollit cupidatat non sint id sint.') #data.song.title)
-        $('#song-cover').css('background-image', "url('#{data.song.cover.replace('\'', '%27')}')")
-        etag = xhr.getResponseHeader('ETag')
+        if xhr.status == 200
+          $('#song-artist').html(data.song.artist)
+          $('#song-title').html(data.song.title)
+          $('#song-cover').css('background-image', "url('#{data.song.cover.replace('\'', '%27')}')")
+          etag = xhr.getResponseHeader('ETag')
     })
 
   player = $("#player")
