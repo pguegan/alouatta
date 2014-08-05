@@ -64,10 +64,13 @@ $song-cover-border-depth: 15px
   margin-top: -70px
 
 .song-text
-  font-size: 24px
+  font-size: 20px
   #song-title
     text-transform: uppercase
     font-weight: bold
+  #song-title, #song-artist
+    max-width: 260px
+    margin: 0 auto
 
 .song-controls
   position: relative
@@ -159,8 +162,17 @@ ul.social
     background-color: #2d4587
 
 @media (min-width: $screen-lg-min)
-  .container
-    padding-top: 240px
+  .outer
+    .container
+      padding-top: 240px
+@media (max-width: $screen-sm-max)
+  .outer
+    .container
+      #song-cover
+        width: 180px
+        height: 180px
+        &:after
+          width: 180px
 @media (min-width: $screen-sm-min)
   .outer
     &.outer-desktop
@@ -168,7 +180,7 @@ ul.social
         vertical-align: middle
     .container
       @include background-contain("/assets/uar/container-md.png")
-      padding-top: 350px
+      padding-top: 400px
       padding-left: 55px
       margin-top: -150px
       left: -55px
@@ -179,6 +191,11 @@ ul.social
         @include background-contain("/assets/uar/container-sm-desktop.png")
         padding-top: 50%
         background-position: center top
+        #song-cover
+          width: 280px
+          height: 280px
+          &:after
+            width: 280px
     &.outer-mobile
       .container
         background-image: url("/assets/uar/container-sm-mobile.png")
@@ -197,5 +214,7 @@ ul.social
       .btn-power
         display: none
         bottom: 0
+      #song-title, #song-artist
+        max-width: 180px
     .middle
       vertical-align: top
