@@ -1,4 +1,12 @@
 jQuery ->
+  popup = null
+  $('a.open-radio-popup').click ->
+    popup = window.open($(this).attr('href'), '', 'location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, width=320, height=416, innerHeight=446', 'true')
+    false
+  $('a.close-radio-popup').click ->
+    popup.close() if popup
+    false
+
   if $('#player').length
     etag = null
     station = $('#player').data('station')

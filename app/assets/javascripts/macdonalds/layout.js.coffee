@@ -1,4 +1,9 @@
 jQuery ->
+  
+  player = $("#player")
+  station = player.data('station')
+  title = $("#title")
+  marquee = $(".marquee_wrapper")
 
   etag = null
   loadData = ->
@@ -10,15 +15,12 @@ jQuery ->
           $("#song_separator").show()
           $('#song_artist').html(data.song.artist)
           $('#song_title').html(data.song.title)
+          $(".marquee").marquee('destroy')
+          $(".marquee").marquee(delayBeforeStart: 0)
           $('.rs-slider li.current img.song_cover').attr('src', data.song.cover)
           etag = xhr.getResponseHeader('ETag')
     })
   
-  player = $("#player")
-  station = player.data('station')
-  title = $("#title")
-  marquee = $(".marquee_wrapper")
-
   $("#song_separator").hide()
   $('#song_artist').html("Chargement...")
 
@@ -26,7 +28,7 @@ jQuery ->
     ready: ->
       $(this).jPlayer("setMedia", {
         mp3: "http://mcdo.stream.instore.as57581.net:8000/#{station}"
-        oga: "http://mcdo.stream.instore.as57581.net:8000/#{station}.ogg"
+        #oga: "http://mcdo.stream.instore.as57581.net:8000/#{station}.ogg"
       }).jPlayer("play")
     supplied: "mp3, oga"
     swfPath: "/assets"
@@ -44,8 +46,6 @@ jQuery ->
   )
   timer.set({ time : 6000, autostart : true })
 
-  $("marquee").marquee("marquee")
-	
   $('.rs-slider').refineSlide(
     transition: 'cubeH'
     maxWidth: 334
@@ -71,7 +71,7 @@ jQuery ->
     afterChange: ->
       player.jPlayer("setMedia", {
         mp3: "http://mcdo.stream.instore.as57581.net:8000/#{station}"
-        oga: "http://mcdo.stream.instore.as57581.net:8000/#{station}.ogg"
+        #oga: "http://mcdo.stream.instore.as57581.net:8000/#{station}.ogg"
       }).jPlayer("play").attr("data-station", station)
       title.fadeTo(500, 1)
       marquee.fadeTo(500, 1)
