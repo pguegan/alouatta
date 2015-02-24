@@ -1,29 +1,25 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.18'
+gem 'rails', '4.2.0'
 
-gem 'thin'
-gem 'capistrano'
-gem 'rvm-capistrano'
-gem 'nokogiri'
-gem 'jbuilder'
-gem 'active_attr'
-gem 'haml-rails'
+gem 'mysql2'
+gem 'unicorn'
+
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.1.0'
+
 gem 'jquery-rails'
+# gem 'turbolinks'
+gem 'jbuilder', '~> 2.0'
 
 group :development do
-	gem 'quiet_assets'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
 end
 
-group :assets do
-  gem 'bootstrap-sass',     '3.1.1.0'
-  gem 'font-awesome-sass',  '~> 4.1.0'
-  gem 'sass-rails',         '~> 3.2.3'
-  gem 'coffee-rails',       '~> 3.2.1'
-  gem 'execjs'
-  gem 'therubyracer', :platforms => :ruby
-  gem 'uglifier',           '>= 1.0.3'
+group :development, :test do
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
 end
-
-gem 'debugger', group: [:test, :development]
-

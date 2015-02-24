@@ -1,2 +1,0 @@
-SetEnv RAILS_ENV production
-SetEnv GEM_PATH /home/alouatta/gems/
