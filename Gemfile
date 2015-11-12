@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.18'
 
 gem 'thin'
-gem 'capistrano'
-gem 'rvm-capistrano'
+gem 'capistrano', require: false
+gem 'rvm-capistrano', require: false
 gem 'nokogiri'
 gem 'jbuilder'
 gem 'active_attr'
@@ -25,5 +25,4 @@ group :assets do
   gem 'uglifier',           '>= 1.0.3'
 end
 
-gem 'debugger', group: [:test, :development]
-
+#gem 'debugger', group: [:test, :development]
