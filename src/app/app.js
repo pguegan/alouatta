@@ -11,7 +11,8 @@
     
     function moduleConfig($sce) {
         $sce.resourceUrlWhitelist([
-            'http://*.myjungly.fr/**'
+            'self',
+            'http://*.myjungly.fr/**',
         ]);
     }
 })(window, document, angular);

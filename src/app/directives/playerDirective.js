@@ -2,20 +2,35 @@
     angular.module('alouatta.player')
         .directive('alouattaPlayer', playerDirective);
     
-    var playerScope = {
+    var playerParameters = {
         'autoplay': '=',
         'controls': '=',
     };
     
+    function initPlayerDirective(scope, element, attrs, controller, transclude) {
+        var audio = element.find('audio');
+        if (audio && audio.length) {
+            scope.vm.player = audio[0];
+        }
+    }
+    
+    function getPlayerTemplateUrl(element, attrs) {
+        if (attrs.type) {
+            return 'templates/player-'+attrs.type+'.html';
+        } else {
+            return 'templates/player-default.html';
+        }
+    }
+    
     function playerDirective() {
         return {
             restrict: 'AE',
-            transclude: false,
 			bindToController: true,
 			controllerAs: 'vm',
-            template: '<audio ng-src="{{ vm.source }}" ng-attr-autoplay="{{ vm.autoplay }}" ng-attr-controls="{{ vm.controls }}"></audio>',
+            templateUrl: getPlayerTemplateUrl,
             controller: 'playerController',
-            scope: playerScope,
+            scope: playerParameters,
+            link: initPlayerDirective,
         };
     }
 })(window, document, angular);

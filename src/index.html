@@ -7,7 +7,26 @@
     </head>
     <body>
         <main ng-app="alouatta.player">
-            <alouatta-player autoplay="true" controls="true" />
+            <alouatta-player autoplay="true"></alouatta-player>
+            <alouatta-player type="single-button"></alouatta-player>
+        
+            <script id="templates/player-default.html" type="text/ng-template">
+                <section>
+                    Autoplay, 2 buttons 
+                    <button ng-click="vm.play()">play</button>
+                    <button ng-click="vm.pause()">pause</button>
+
+                    <audio ng-src="{{ vm.source }}" ng-attr-autoplay="{{ vm.autoplay }}" ng-attr-controls="{{ vm.controls }}"></audio>
+                </section>
+            </script>
+            <script id="templates/player-single-button.html" type="text/ng-template">
+                <section>
+                    Single button
+                    <button ng-click="vm.togglePlay()">play/pause</button>
+
+                    <audio ng-src="{{ vm.source }}" ng-attr-autoplay="{{ vm.autoplay }}" ng-attr-controls="{{ vm.controls }}"></audio>
+                </section>
+            </script>
         </main>
     </body>
 </html>
