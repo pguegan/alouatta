@@ -1,0 +1,31 @@
+{
+  "name": "alouatta",
+  "version": "1.0.0",
+  "description": "Audio player",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pguegan/alouatta.git"
+  },
+  "author": "Thibaut DISEUR",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pguegan/alouatta/issues"
+  },
+  "homepage": "https://github.com/pguegan/alouatta#readme",
+  "dependencies": {
+    "bower": "^1.6.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-flatten": "^0.2.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.1"
+  }
+}
