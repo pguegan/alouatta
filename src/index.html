@@ -7,6 +7,9 @@
     </head>
     <body>
         <main ng-app="alouatta.player">
+            <section ng-controller="playerController as vm">
+                <audio ng-src="{{ vm.source }}" controls></audio>
+            </section>
         </main>
     </body>
 </html>
