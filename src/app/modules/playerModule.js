@@ -1,18 +1,17 @@
 (function(window, document, angular, undefined) {
-    angular.module('alouatta', ['alouatta.player'])
+    angular.module('alouatta.player', [])
         .constant('CONFIG', {
             player: {
                 streamUrl: "http://stream.myjungly.fr/RIFFX",
             }
         })
-        .config(moduleConfig);
+        .config(playerModuleConfig);
     
-    moduleConfig.$inject = ['$sceDelegateProvider'];
+    playerModuleConfig.$inject = ['$sceDelegateProvider'];
     
-    function moduleConfig($sce) {
+    function playerModuleConfig($sce) {
         $sce.resourceUrlWhitelist([
-            'self',
-            'http://*.myjungly.fr/**',
+            'http://*.myjungly.fr/**'
         ]);
     }
 })(window, document, angular);

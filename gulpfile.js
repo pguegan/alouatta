@@ -58,12 +58,14 @@ gulp.task('lint', function() {
 
 // Uglify app JS files
 gulp.task('uglify', function() {
-  gulp.src('./assets/js/*.js')
-    .pipe(gulp.dest('./dist/js/lib'));
-
-  return gulp.src('./src/**/*.js')
+  return gulp.src([
+      // Add modules declaration first
+      './src/app/modules/*.js',
+      // Then add others
+      './src/**/*.js',
+    ])
     .pipe(sourcemaps.init())
-      .pipe(concat('app.min.js'))
+    .pipe(concat('app.min.js'))
     .pipe(uglify())
     .pipe(ngAnnotate())
     .pipe(sourcemaps.write('.'))
