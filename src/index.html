@@ -4,6 +4,14 @@
         <meta charset="UTF-8" />
         <script src="js/lib/angular.min.js" type="text/javascript"></script>
         <script src="js/app.min.js" type="text/javascript"></script>
+        <style>
+            .loading {
+                border:1px solid #F00;
+            }            
+            .loaded {
+                font-weight: bold;
+            }
+        </style> 
     </head>
     <body>
         <main ng-app="alouatta">
@@ -12,19 +20,18 @@
         
             <script id="templates/player-default.html" type="text/ng-template">
                 <section>
-                    Autoplay, 2 buttons 
-                    <button ng-click="vm.play()">play</button>
-                    <button ng-click="vm.pause()">pause</button>
-
-                    <audio ng-src="{{ vm.source }}" ng-attr-autoplay="{{ vm.autoplay }}" ng-attr-controls="{{ vm.controls }}"></audio>
+                    <h2>Autoplay, 2 buttons</h2>
+                    <button ng-click="vm.play()" ng-disabled="vm.isLoading || vm.isPlaying">play</button>
+                    <button ng-click="vm.pause()" ng-disabled="vm.isLoading || !vm.isPlaying">pause</button>
+                    <label ng-show="vm.isLoading" class="loading">Loading...</label>
                 </section>
             </script>
             <script id="templates/player-single-button.html" type="text/ng-template">
                 <section>
-                    Single button
-                    <button ng-click="vm.togglePlay()">play/pause</button>
-
-                    <audio ng-src="{{ vm.source }}" ng-attr-autoplay="{{ vm.autoplay }}" ng-attr-controls="{{ vm.controls }}"></audio>
+                    <h2>Single button</h2>
+                    <button ng-click="vm.togglePlay()" ng-class="{'loading': vm.isLoading, 'loaded': !vm.isLoading}">
+                        play/pause
+                    </button>
                 </section>
             </script>
         </main>

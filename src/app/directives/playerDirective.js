@@ -4,14 +4,48 @@
     
     var playerParameters = {
         'autoplay': '=',
-        'controls': '=',
     };
     
+    var playerEvents = [
+            "loadstart",
+            "durationchange",
+            "loadedmetadata",
+            "loadeddata",
+            //"progress",
+            "canplay",
+            "canplaythrough",
+            "abort",
+            "emptied",
+            "ended",
+            "error",
+            "pause",
+            "play",
+            "playing",
+            "ratechange",
+            "seeked",
+            "seeking",
+            "stalled",
+            "suspend",
+            //"timeupdate",
+            "volumechange",
+            "waiting",
+        ];
+    
     function initPlayerDirective(scope, element, attrs, controller, transclude) {
-        var audio = element.find('audio');
-        if (audio && audio.length) {
-            scope.vm.player = audio[0];
+        var audio = new Audio();
+        
+        if(attrs.autoplay) {
+            audio.autoplay = true;
         }
+        
+        for(var i=0; i<playerEvents.length; i++) {
+           audio.addEventListener(playerEvents[i], function(event) {
+               controller.onPlayerEvent(event);
+               scope.$apply();
+           }) 
+        }
+        
+        controller.init(audio);
     }
     
     function getPlayerTemplateUrl(element, attrs) {
