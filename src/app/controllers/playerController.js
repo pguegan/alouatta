@@ -16,6 +16,7 @@
         vm.play = play;
         vm.pause = pause;
         vm.togglePlay = togglePlay;
+        vm.toggleMute = toggleMute;
         vm.onPlayerEvent = onPlayerEvent;
                 
         function onPlayerEvent(event) {
@@ -55,6 +56,11 @@
             } else {
                 vm.pause();
             }
+        }
+        
+        // Toggles mute 
+        function toggleMute() {
+            vm.player.muted = !vm.player.muted;
         }
     }
 })(window, document, angular);

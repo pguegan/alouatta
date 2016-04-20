@@ -13,6 +13,9 @@
             .loaded {
                 font-weight: bold;
             }
+            .muted {
+                color: #8E8E8E;
+            }
         </style> 
     </head>
     <body>
@@ -26,7 +29,8 @@
                     <button ng-click="vm.play()" ng-disabled="vm.isLoading || vm.isPlaying">play</button>
                     <button ng-click="vm.pause()" ng-disabled="vm.isLoading || !vm.isPlaying">pause</button>
                     <label ng-show="vm.isLoading" class="loading">Loading...</label><br/>
-                    <label>Volume: </label><input type="number" min="0" max="1" step="0.1" ng-model="vm.player.volume" /> 
+                    <label>Volume: </label><input type="number" min="0" max="1" step="0.1" ng-model="vm.player.volume" />
+                    <button ng-click="vm.toggleMute()" ng-class="{'muted': vm.player.muted}">mute</button> 
                 </section>
             </script>
             
