@@ -4,6 +4,7 @@
     
     var playerParameters = {
         'autoplay': '=',
+        'volume': '=',
     };
     
     var playerEvents = [
@@ -36,6 +37,9 @@
         
         if(attrs.autoplay) {
             audio.autoplay = true;
+        }
+        if(attrs.volume) {
+            audio.volume = Number(attrs.volume);
         }
         
         for(var i=0; i<playerEvents.length; i++) {
