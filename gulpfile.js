@@ -10,11 +10,14 @@ var gulp = require('gulp'),
     gls = require('gulp-live-server'),
     server;
 
-// Default task for development : build and watch
-gulp.task('default', ['build', 'watch', 'server']);
+// Default task : dev
+gulp.task('default', ['dev']);
 
 // Build app for release
 gulp.task('build', ['copy', 'lint', 'uglify']);
+
+// Developpement task : build and watch
+gulp.task('dev', ['build', 'watch', 'server']);
 
 // Watch for files changes
 gulp.task('watch', function () {
