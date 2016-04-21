@@ -1,5 +1,8 @@
 (function(window, document, angular, undefined) {
-    angular.module('alouatta', ['alouatta.player'])
+    angular.module('alouatta', [
+        'alouatta.player',
+        'alouatta.playlist',
+        ])
         .constant('CONFIG', {
             player: {
                 streamUrl: "http://stream.myjungly.fr/RIFFX",

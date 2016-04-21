@@ -2,11 +2,13 @@
     angular.module('alouatta.player')
         .directive('alouattaPlayer', playerDirective);
     
+    // Component bindable parameters
     var playerParameters = {
         'autoplay': '=',
         'volume': '=',
     };
     
+    // Supported player events
     var playerEvents = [
             "loadstart",
             "durationchange",
@@ -32,6 +34,15 @@
             "waiting",
         ];
     
+    // Called when an event occurs on player
+    function playerEventCallback(scope, controller) {
+        return function(event) {
+            controller.onPlayerEvent(event);
+               scope.$apply();
+        };
+    }
+    
+    // Inits audio player 
     function initPlayerDirective(scope, element, attrs, controller, transclude) {
         var audio = new Audio();
         
@@ -43,15 +54,13 @@
         }
         
         for(var i=0; i<playerEvents.length; i++) {
-           audio.addEventListener(playerEvents[i], function(event) {
-               controller.onPlayerEvent(event);
-               scope.$apply();
-           }) 
+           audio.addEventListener(playerEvents[i], playerEventCallback);
         }
         
         controller.init(audio);
     }
     
+    // Gets player directive's template url
     function getPlayerTemplateUrl(element, attrs) {
         if (attrs.type) {
             return 'templates/player-'+attrs.type+'.html';
@@ -60,6 +69,7 @@
         }
     }
     
+    // Gets player directive's definition
     function playerDirective() {
         return {
             restrict: 'AE',
