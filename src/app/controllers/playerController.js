@@ -2,9 +2,9 @@
     angular.module('alouatta.player')
         .controller('playerController', playerController);
     
-    playerController.$inject = ['CONFIG'];
+    playerController.$inject = ['CONFIG', '$rootScope'];
     
-    function playerController(CONFIG) {
+    function playerController(CONFIG, $rootScope) {
         var vm = this;
         
         // Properties
@@ -12,16 +12,20 @@
         vm.isPlaying = false;
         
         // Public methods
-        vm.init = init;
+        vm.setPlayer = setPlayer;
         vm.play = play;
         vm.pause = pause;
         vm.togglePlay = togglePlay;
         vm.toggleMute = toggleMute;
         vm.onPlayerEvent = onPlayerEvent;
-                
+        
+        init();
+        
+        /*
+            Public methods
+        */
+        
         function onPlayerEvent(event) {
-            console.log(event.type);
-            
             if(event.type === "loadstart") {
                 vm.isLoading = true;
             } else if(event.type === "canplay") {
@@ -33,8 +37,8 @@
             }
         }
         
-        // Inits player
-        function init(player) {
+        // Links audio player
+        function setPlayer(player) {
             vm.player = player;
             player.src = CONFIG.player.streamUrl;
         }
@@ -61,6 +65,20 @@
         // Toggles mute 
         function toggleMute() {
             vm.player.muted = !vm.player.muted;
+        }
+        
+        /*
+            Internal methods
+        */
+        
+        // Inits controller
+        function init() {            
+            $rootScope.$on('setTrack', setCurrentTrack);
+        }
+        
+        // Sets current track on message event
+        function setCurrentTrack(event, track) {
+            vm.player.src = track.url;
         }
     }
 })(window, document, angular);

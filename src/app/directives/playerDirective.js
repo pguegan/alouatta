@@ -38,13 +38,17 @@
     function playerEventCallback(scope, controller) {
         return function(event) {
             controller.onPlayerEvent(event);
-               scope.$apply();
+            scope.$apply();
         };
     }
     
     // Inits audio player 
     function initPlayerDirective(scope, element, attrs, controller, transclude) {
         var audio = new Audio();
+        
+        for(var i=0; i<playerEvents.length; i++) {
+           audio.addEventListener(playerEvents[i], playerEventCallback(scope, controller));
+        }
         
         if(attrs.autoplay) {
             audio.autoplay = true;
@@ -53,17 +57,13 @@
             audio.volume = Number(attrs.volume);
         }
         
-        for(var i=0; i<playerEvents.length; i++) {
-           audio.addEventListener(playerEvents[i], playerEventCallback);
-        }
-        
-        controller.init(audio);
+        controller.setPlayer(audio);
     }
     
     // Gets player directive's template url
     function getPlayerTemplateUrl(element, attrs) {
         if (attrs.type) {
-            return 'templates/player-'+attrs.type+'.html';
+            return 'templates/player-' + attrs.type + '.html';
         } else {
             return 'templates/player-default.html';
         }

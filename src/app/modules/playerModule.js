@@ -11,7 +11,8 @@
     
     function playerModuleConfig($sce) {
         $sce.resourceUrlWhitelist([
-            'http://*.myjungly.fr/**'
+            'http://stream.myjungly.fr/**',
+            'http://www.cpordevises.com/uploads/**',
         ]);
     }
 })(window, document, angular);

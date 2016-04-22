@@ -20,8 +20,9 @@
     </head>
     <body>
         <main ng-app="alouatta">
-            <alouatta-player autoplay="true" volume="0.5"></alouatta-player>
+            <alouatta-player autoplay="true" volume="0.1"></alouatta-player>
             <alouatta-player type="single-button"></alouatta-player>
+            <alouatta-playlist></alouatta-playlist>
         
             <script id="templates/player-default.html" type="text/ng-template">
                 <section>
@@ -40,6 +41,27 @@
                     <button ng-click="vm.togglePlay()" ng-class="{'loading': vm.isLoading, 'loaded': !vm.isLoading}">
                         play/pause
                     </button>
+                </section>
+            </script>
+        
+            <script id="templates/playlist-default.html" type="text/ng-template">
+                <section>
+                    <h2>playlist</h2>
+                    
+                    <a href ng-click="vm.previousPage()">Prev.</a>
+                    -
+                    <a href ng-click="vm.nextPage()">Next</a>
+                    
+                    <ul>
+                        <li ng-repeat="track in vm.tracks">
+                            {{track.index}} {{ track.pubdate | date:'shortDate' }} 
+                            - <a href ng-click="vm.setTrack(track)">{{ track.title }}</a>
+                        </li>
+                    </ul>
+                    
+                    <a href ng-click="vm.previousPage()">Prev.</a>
+                    -
+                    <a href ng-click="vm.nextPage()">Next</a>                    
                 </section>
             </script>
         </main>
