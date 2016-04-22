@@ -5,6 +5,7 @@
     // Component bindable parameters
     var playerParameters = {
         'autoplay': '@',
+        'preload': '@',
         'volume': '@',
         'src': '@',
     };
@@ -53,6 +54,9 @@
         
         if(angular.isDefined(attrs.autoplay)) {
             audio.autoplay = true;
+        }
+        if(angular.isDefined(attrs.preload)) {
+            audio.preload = attrs.preload;
         }
         if(angular.isDefined(attrs.volume)) {
             audio.volume = Number(attrs.volume);
