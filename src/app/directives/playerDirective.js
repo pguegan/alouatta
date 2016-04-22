@@ -16,7 +16,7 @@
             "durationchange",
             "loadedmetadata",
             "loadeddata",
-            //"progress",
+            "progress",
             "canplay",
             "canplaythrough",
             "abort",

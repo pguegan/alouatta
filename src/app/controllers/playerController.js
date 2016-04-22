@@ -10,6 +10,7 @@
         // Properties
         vm.isLoading = false;
         vm.isPlaying = false;
+        vm.buffered = [];
         
         // Public methods
         vm.setPlayer = setPlayer;
@@ -27,7 +28,7 @@
         */
         
         function onPlayerEvent(event) {
-            console.log(event.type)
+            //console.log(event.type)
             vm.isError = false;
             
             if(event.type === "error") {
@@ -43,6 +44,13 @@
                 vm.isPlaying = false;
             } else if(event.type === "playing") {
                 vm.isPlaying = true;
+            } else if(event.type === "progress") {
+                for(var i=0; i<vm.player.buffered.length; i++) {
+                    vm.buffered[i] = {
+                        start: vm.player.buffered.start(i),
+                        end: vm.player.buffered.end(i)
+                    };
+                }
             }
         }
         
@@ -80,7 +88,7 @@
         */
         
         // Inits controller
-        function init() {            
+        function init() {
             $rootScope.$on('setTrack', setCurrentTrack);
         }
         

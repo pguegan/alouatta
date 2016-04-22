@@ -7,6 +7,9 @@
         <script src="js/app.min.js" type="text/javascript"></script>
         
         <style>
+            section section {
+                padding-top: 10px;
+            }
             .loading {
                 border:1px solid #F80;
             }            
@@ -19,7 +22,7 @@
             .error {
                 border: 1px solid #F00;
             }
-        </style> 
+        </style>
     </head>
     <body>
         <main ng-app="alouatta">
@@ -35,17 +38,27 @@
                     
                     <label ng-show="vm.isLoading" class="loading">Loading...</label><br/>
                     
-                    <label>Volume: </label>
-                    <input type="number" min="0" max="1" step="0.1" ng-model="vm.player.volume" />
-                    <button ng-click="vm.toggleMute()" ng-class="{ 'muted': vm.player.muted }">mute</button>
-                    <br/>
+                    <section>
+                        <label>Volume: </label>
+                        <input type="number" min="0" max="1" step="0.1" ng-model="vm.player.volume" />
+                        <button ng-click="vm.toggleMute()" ng-class="{ 'muted': vm.player.muted }">mute</button>
+                    </section>
                     
-                    <label>Temps: </label>
-                    <span>{{ vm.player.currentTime | number:2 }}s</span>
-                    <span ng-show="vm.player.duration && Number.isFinite(vm.player.duration)">
-                        / {{ vm.player.duration }}</span>
-                    <input type="number" min="0" ng-model="vm.player.currentTime" />
-                    <br/>
+                    <section>
+                        <label>Temps: </label>
+                        <span>{{ vm.player.currentTime | number:2 }}s</span>
+                        /
+                        <span>{{ vm.player.duration }}</span>
+                        <br />
+                        <input type="number" min="0" ng-model="vm.player.currentTime" />
+                    </section>
+                    
+                    <section>
+                        <label>Buffered</label>
+                        <span ng-repeat="buffer in vm.buffered">
+                            {{ buffer.start | number:2 }}-{{ buffer.end | number:2 }}
+                        </span>
+                    </section>
                 </section>
             </script>
             
@@ -69,7 +82,9 @@
                     <ul>
                         <li ng-repeat="track in vm.tracks">
                             {{track.index}} {{ track.pubdate | date:'shortDate' }} 
-                            - <a href ng-click="vm.setTrack(track)">{{ track.title }}</a>
+                            -
+                            <a href ng-click="vm.addTrack(track)" title="Add this track to playlist">+</a> 
+                            <a href ng-click="vm.setTrack(track)" title="Play this track">{{ track.title }}</a>
                         </li>
                     </ul>
                     
