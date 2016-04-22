@@ -2,9 +2,9 @@
     angular.module('alouatta.player')
         .controller('playerController', playerController);
     
-    playerController.$inject = ['CONFIG', '$rootScope'];
+    playerController.$inject = ['$rootScope'];
     
-    function playerController(CONFIG, $rootScope) {
+    function playerController($rootScope) {
         var vm = this;
         
         // Properties
@@ -40,7 +40,6 @@
         // Links audio player
         function setPlayer(player) {
             vm.player = player;
-            player.src = CONFIG.player.streamUrl;
         }
         
         // Starts player

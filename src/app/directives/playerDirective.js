@@ -4,8 +4,9 @@
     
     // Component bindable parameters
     var playerParameters = {
-        'autoplay': '=',
-        'volume': '=',
+        'autoplay': '@',
+        'volume': '@',
+        'src': '@',
     };
     
     // Supported player events
@@ -50,11 +51,14 @@
            audio.addEventListener(playerEvents[i], playerEventCallback(scope, controller));
         }
         
-        if(attrs.autoplay) {
+        if(angular.isDefined(attrs.autoplay)) {
             audio.autoplay = true;
         }
-        if(attrs.volume) {
+        if(angular.isDefined(attrs.volume)) {
             audio.volume = Number(attrs.volume);
+        }
+        if(angular.isDefined(attrs.src)) {
+            audio.src = attrs.src;
         }
         
         controller.setPlayer(audio);

@@ -23,7 +23,7 @@ gulp.task('dev', ['build', 'watch', 'server']);
 gulp.task('watch', function () {
     gulp.watch(['./src/**/*.js', './assets/js/*.js'], ['lint', 'uglify'])
         .on('change', notifyServer);
-    gulp.watch('./src/**/*.html', ['copy'], notifyServer)
+    gulp.watch('./src/**/*.html', ['copy'])
         .on('change', notifyServer);
 });
 

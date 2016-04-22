@@ -1,13 +1,8 @@
 (function(window, document, angular, undefined) {
     angular.module('alouatta', [
-        'alouatta.player',
-        'alouatta.playlist',
+            'alouatta.player',
+            'alouatta.playlist',
         ])
-        .constant('CONFIG', {
-            player: {
-                streamUrl: "http://stream.myjungly.fr/RIFFX",
-            }
-        })
         .config(moduleConfig);
     
     moduleConfig.$inject = ['$sceDelegateProvider'];
@@ -15,7 +10,8 @@
     function moduleConfig($sce) {
         $sce.resourceUrlWhitelist([
             'self',
-            'http://*.myjungly.fr/**',
+            'http://stream.myjungly.fr/**',
+            'http://www.cpordevises.com/uploads/**',
         ]);
     }
 })(window, document, angular);
