@@ -21,9 +21,16 @@ gulp.task('dev', ['build', 'watch', 'server']);
 
 // Watch for files changes
 gulp.task('watch', function () {
-    gulp.watch(['./src/**/*.js', './assets/js/*.js'], ['lint', 'uglify'])
+    gulp.watch([
+        './src/**/*.js',
+        './assets/js/*.js'
+    ], ['lint', 'uglify'])
         .on('change', notifyServer);
-    gulp.watch('./src/**/*.html', ['copy'])
+    
+    gulp.watch([
+        './src/**/*.html',
+        './src/data/**'
+    ], ['copy'])
         .on('change', notifyServer);
 });
 
@@ -47,6 +54,12 @@ gulp.task('copy', function() {
     ])
         .pipe(gulp.dest('./dist/js/lib'));
     
+    // Test data
+    gulp.src([
+        './src/data/**'
+    ])
+        .pipe(gulp.dest('./dist/data'));
+    
     // Main page
     return gulp.src('./src/index.html')
         .pipe(gulp.dest('./dist'));
@@ -67,10 +80,10 @@ gulp.task('uglify', function() {
       // Then add others
       './src/**/*.js',
     ])
-    .pipe(sourcemaps.init())
+    //.pipe(sourcemaps.init())
     .pipe(concat('app.min.js'))
-    .pipe(uglify())
-    .pipe(ngAnnotate())
-    .pipe(sourcemaps.write('.'))
+    //.pipe(uglify())
+    //.pipe(ngAnnotate())
+    //.pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/js'));
 });

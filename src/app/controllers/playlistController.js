@@ -55,7 +55,10 @@
         }
         
         function getTracks() {
-            vm.tracks = playlistService.getTracks(paging.offset, paging.count);
+            playlistService.getTracks(paging.offset, paging.count)
+                .then(function(result) {
+                    vm.tracks = result;
+                });
         }
     }
 })(window, document, angular);
