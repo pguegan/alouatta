@@ -19,6 +19,7 @@
         vm.toggleMute = toggleMute;
         vm.onPlayerEvent = onPlayerEvent;
         
+        var previousTrack;
         init();
         
         /*
@@ -26,17 +27,22 @@
         */
         
         function onPlayerEvent(event) {
+            console.log(event.type)
             vm.isError = false;
-            if(event.type === "loadstart") {
-                vm.isLoading = true;
-            } else if(event.type === "canplay") {
+            
+            if(event.type === "error") {
+                vm.isError = true;
+            } else if(event.type === "canplay" || event.type === "suspend") {
                 vm.isLoading = false;
+            } else if(event.type === "loadstart" || event.type === "waiting") {
+                vm.isLoading = true;
+            } else if(event.type === "ended") {
+                vm.isPlaying = false;
+                resumePreviousTrack();
             } else if(event.type === "pause") {
                 vm.isPlaying = false;
             } else if(event.type === "playing") {
                 vm.isPlaying = true;
-            }else if(event.type === "error") {
-                vm.isError = true;
             }
         }
         
@@ -80,7 +86,18 @@
         
         // Sets current track on message event
         function setCurrentTrack(event, track) {
+            if(!angular.isDefined(previousTrack)) {
+                previousTrack = vm.player.src;
+            }
+            
             vm.player.src = track.url;
+        }
+        
+        // Sets previous track back
+        function resumePreviousTrack() {
+            if(angular.isDefined(previousTrack)) {
+                vm.player.src = previousTrack;
+            }
         }
     }
 })(window, document, angular);
