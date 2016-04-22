@@ -26,6 +26,7 @@
         */
         
         function onPlayerEvent(event) {
+            vm.isError = false;
             if(event.type === "loadstart") {
                 vm.isLoading = true;
             } else if(event.type === "canplay") {
@@ -34,6 +35,8 @@
                 vm.isPlaying = false;
             } else if(event.type === "playing") {
                 vm.isPlaying = true;
+            }else if(event.type === "error") {
+                vm.isError = true;
             }
         }
         
