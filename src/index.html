@@ -14,6 +14,9 @@
                 border:1px solid #F80;
             }            
             .loaded {
+                text-decoration: underline;
+            }
+            .playing {
                 font-weight: bold;
             }
             .muted {
@@ -25,22 +28,24 @@
         </style>
     </head>
     <body>
-        <main ng-app="alouatta">
-            <alouatta-player src="http://stream.myjungly.fr/RIFFX" autoplay="true" volume="0.1"></alouatta-player>
-            <alouatta-player src="http://stream.myjungly.fr/RIFFX" preload="none" type="single-button"></alouatta-player>
-            <alouatta-playlist></alouatta-playlist>
-        
-            <script id="templates/player-default.html" type="text/ng-template">
+        <main ng-app="alouatta" ng-strict-di>
+            <alouatta-player src="http://stream.myjungly.fr/RIFFX" autoplay="true" volume="0.1" preload="auto">
+                <alouatta-controls></alouatta-controls>
+                <alouatta-controls type="single-button"></alouatta-controls>
+                <alouatta-playlist></alouatta-playlist>
+            </alouatta-player>
+            
+            <script id="templates/controls-default.html" type="text/ng-template">
                 <section>
                     <h2>Autoplay, 2 buttons</h2>
-                    <button ng-click="vm.play()" ng-disabled="vm.isLoading || vm.isPlaying">play</button>
-                    <button ng-click="vm.pause()" ng-disabled="vm.isLoading || !vm.isPlaying">pause</button>
+                    <button ng-click="vm.play()" ng-disabled="vm.player.isLoading || vm.player.isPlaying">play</button>
+                    <button ng-click="vm.pause()" ng-disabled="vm.player.isLoading || !vm.player.isPlaying">pause</button>
                     
-                    <label ng-show="vm.isLoading" class="loading">Loading...</label><br/>
+                    <label ng-show="vm.player.isLoading" class="loading">Loading...</label><br/>
                     
                     <section>
                         <label>Volume: </label>
-                        <input type="number" min="0" max="1" step="0.1" ng-model="vm.player.volume" />
+                        <input type="number" min="0" max="1" step="0.1" ng-model="vm.player.volume" ng-change="vm.setVolume()" />
                         <button ng-click="vm.toggleMute()" ng-class="{ 'muted': vm.player.muted }">mute</button>
                     </section>
                     
@@ -55,17 +60,17 @@
                     
                     <section>
                         <label>Buffered</label>
-                        <span ng-repeat="buffer in vm.buffered">
+                        <span ng-repeat="buffer in vm.player.buffered">
                             {{ buffer.start | number:2 }}-{{ buffer.end | number:2 }}
                         </span>
                     </section>
                 </section>
             </script>
             
-            <script id="templates/player-single-button.html" type="text/ng-template">
+            <script id="templates/controls-single-button.html" type="text/ng-template">
                 <section>
                     <h2>Single button</h2>
-                    <button ng-click="vm.togglePlay()" ng-class="{ 'loading': vm.isLoading, 'loaded': !vm.isLoading, 'error': vm.isError }">
+                    <button ng-click="vm.togglePlay()" ng-class="{ 'playing': vm.player.isPlaying, 'loading': vm.player.isLoading, 'loaded': !vm.player.isLoading, 'error': vm.player.isError }">
                         play/pause
                     </button>
                 </section>

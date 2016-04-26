@@ -2,76 +2,75 @@
     angular.module('alouatta.player')
         .controller('playerController', playerController);
     
-    playerController.$inject = ['$rootScope'];
+    playerController.$inject = ['$scope', '$log'];
     
-    function playerController($rootScope) {
+    function playerController(scope, log) {
         var vm = this;
         
         // Properties
-        vm.isLoading = false;
-        vm.isPlaying = false;
-        vm.buffered = [];
+        vm.player = {
+            isLoading: false,
+            isPlaying: false,
+            isError: false,
+            buffered: [],
+        };
         
         // Public methods
-        vm.setPlayer = setPlayer;
+        vm.$onInit = init;
+        vm.$onDestroy = cleanup;
         vm.play = play;
         vm.pause = pause;
         vm.togglePlay = togglePlay;
         vm.toggleMute = toggleMute;
-        vm.onPlayerEvent = onPlayerEvent;
+        vm.setVolume = setVolume;
         
-        var previousTrack;
-        init();
+        // Fields
+        var audio,
+            previousTrack,
+            trackQueue = [],
+            // Supported player events
+            playerEvents = [
+                    "loadstart",
+                    "durationchange",
+                    "loadedmetadata",
+                    "loadeddata",
+                    "progress",
+                    "canplay",
+                    "canplaythrough",
+                    "abort",
+                    "emptied",
+                    "ended",
+                    "error",
+                    "pause",
+                    "play",
+                    "playing",
+                    "ratechange",
+                    "seeked",
+                    "seeking",
+                    "stalled",
+                    "suspend",
+                    "timeupdate",
+                    "volumechange",
+                    "waiting",
+                ];
         
         /*
             Public methods
         */
         
-        function onPlayerEvent(event) {
-            //console.log(event.type)
-            vm.isError = false;
-            
-            if(event.type === "error") {
-                vm.isError = true;
-            } else if(event.type === "canplay" || event.type === "suspend") {
-                vm.isLoading = false;
-            } else if(event.type === "loadstart" || event.type === "waiting") {
-                vm.isLoading = true;
-            } else if(event.type === "ended") {
-                vm.isPlaying = false;
-                resumePreviousTrack();
-            } else if(event.type === "pause") {
-                vm.isPlaying = false;
-            } else if(event.type === "playing") {
-                vm.isPlaying = true;
-            } else if(event.type === "progress") {
-                for(var i=0; i<vm.player.buffered.length; i++) {
-                    vm.buffered[i] = {
-                        start: vm.player.buffered.start(i),
-                        end: vm.player.buffered.end(i)
-                    };
-                }
-            }
-        }
-        
-        // Links audio player
-        function setPlayer(player) {
-            vm.player = player;
-        }
-        
         // Starts player
         function play() {
-            vm.player.play();
+            audio.play();
         }
         
         // Pauses player
         function pause() {
-            vm.player.pause();
+            audio.pause();
         }
         
         // Toggles player 
         function togglePlay() {
-            if(vm.player.paused) {
+            if(audio.paused) {
                 vm.play();
             } else {
                 vm.pause();
@@ -80,7 +79,11 @@
         
         // Toggles mute 
         function toggleMute() {
-            vm.player.muted = !vm.player.muted;
+            audio.muted = !audio.muted;
+        }
+        
+        function setVolume(volume) {
+            audio.volume = volume;
         }
         
         /*
@@ -89,22 +92,85 @@
         
         // Inits controller
         function init() {
-            $rootScope.$on('setTrack', setCurrentTrack);
+            audio = new Audio();
+            
+            for(var i=0; i<playerEvents.length; i++) {
+                audio.addEventListener(playerEvents[i], onPlayerEvent);
+            }
+            
+            if(angular.isDefined(vm.autoplay)) {
+                audio.autoplay = true;
+            }
+            if(angular.isDefined(vm.preload)) {
+                audio.preload = vm.preload;
+            }
+            if(angular.isDefined(vm.volume)) {
+                audio.volume = Number(vm.volume);
+            }
+            if(angular.isDefined(vm.src)) {
+                audio.src = vm.src;
+            }
+            
+            vm.player.volume = audio.volume;
+            vm.player.muted = audio.muted;
+        }
+        
+        // Cleanup resources on destroy
+        function cleanup() {
+            if(audio) {
+                audio.pause();
+            }
+        }
+        
+        // Called when an event occurs on player
+        function onPlayerEvent(event) {
+            // Verbose events
+            if(event.type !== "progress" && event.type !== "timeupdate")
+            log.debug(event.type);
+            
+            vm.player.isError = false;
+            
+            if(event.type === "error") {
+                vm.player.isError = true;
+            } else if(event.type === "canplay" || event.type === "suspend") {
+                vm.player.isLoading = false;
+            } else if(event.type === "loadstart" || event.type === "waiting") {
+                vm.player.isLoading = true;
+            } else if(event.type === "ended") {
+                vm.player.isPlaying = false;
+                resumePreviousTrack();
+            } else if(event.type === "pause") {
+                vm.player.isPlaying = false;
+            } else if(event.type === "playing") {
+                vm.player.isPlaying = true;
+            } else if(event.type === "progress") {
+                for(var i=0; i<audio.buffered.length; i++) {
+                    vm.player.buffered[i] = {
+                        start: audio.buffered.start(i),
+                        end: audio.buffered.end(i)
+                    };
+                }
+            } else if(event.type === "volumechange") {
+                vm.player.volume = audio.volume;
+                vm.player.muted = audio.muted;
+            }
+            
+            scope.$apply();
         }
         
         // Sets current track on message event
         function setCurrentTrack(event, track) {
             if(!angular.isDefined(previousTrack)) {
-                previousTrack = vm.player.src;
+                previousTrack = audio.src;
             }
             
-            vm.player.src = track.url;
+            audio.src = track.url;
         }
         
         // Sets previous track back
         function resumePreviousTrack() {
             if(angular.isDefined(previousTrack)) {
-                vm.player.src = previousTrack;
+                audio.src = previousTrack;
             }
         }
     }
