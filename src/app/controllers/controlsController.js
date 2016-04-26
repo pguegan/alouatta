@@ -5,6 +5,7 @@
     controlsController.$inject = ['$log'];
 
     function controlsController(log) {
+        // Fields
         var vm = this;
 
         // Public methods
@@ -15,10 +16,7 @@
         vm.toggleMute = toggleMute;
         vm.setVolume = setVolume;
         vm.setCurrentTime = setCurrentTime;
-
-        var previousTrack,
-            trackQueue = [];
-
+        
         /*
             Public methods
         */
@@ -54,7 +52,7 @@
 
         // Sets volume
         function setCurrentTime() {
-            vm.playerCtrl.setCurrentTime(vm.player.currentTime);
+            vm.playerCtrl.setCurrentTime(vm.player.desiredTime);
         }
 
         /*
@@ -64,22 +62,6 @@
         // Inits controller
         function init() {
             vm.player = vm.playerCtrl.player;
-        }
-
-        // Sets current track on message event
-        function setCurrentTrack(event, track) {
-            if (!angular.isDefined(previousTrack)) {
-                previousTrack = vm.player.src;
-            }
-
-            vm.player.src = track.url;
-        }
-
-        // Sets previous track back
-        function resumePreviousTrack() {
-            if (angular.isDefined(previousTrack)) {
-                vm.player.src = previousTrack;
-            }
         }
     }
 })(window, document, angular);

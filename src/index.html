@@ -50,12 +50,20 @@
                     </section>
                     
                     <section>
-                        <label>Temps: </label>
-                        <span>{{ vm.player.currentTime | number:2 }}s</span>
-                        /
-                        <span>{{ vm.player.duration }}</span>
+                        <p ng-hide="vm.player.duration">
+                            <label>Temps: </label>
+                            <span>{{ vm.player.currentTime | number:2 }}s</span>
+                        </p>
+                        <p ng-show="vm.player.duration">
+                            <label>Temps: </label>
+                            <input type="number" min="0" ng-model="vm.player.desiredTime" ng-change="vm.setCurrentTime()" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" />
+                            <br />
+                            
+                            <span>{{ vm.player.currentTime | number:2 }}s</span>
+                            /
+                            <span>{{ vm.player.duration | number:2 }}</span>
+                        </p>
                         <br />
-                        <input type="number" min="0" ng-model="vm.player.currentTime" ng-change="vm.setCurrentTime()" />
                     </section>
                     
                     <section>

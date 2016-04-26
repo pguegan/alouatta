@@ -20,7 +20,7 @@
         ]);
         
         // Production settings
-        //compile.debugInfoEnabled(false);
-        //log.debugEnabled(false);
+        compile.debugInfoEnabled(false);
+        log.debugEnabled(false);
     }
 })(window, document, angular);

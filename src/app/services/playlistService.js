@@ -2,16 +2,17 @@
     angular.module('alouatta.player')
         .service('playlistService', playlistService);
         
-    playlistService.$inject = ['$rootScope', '$http', '$q', '$log'];
+    playlistService.$inject = ['$http', '$q', '$log'];
     
-    function playlistService($rootScope, $http, $q, $log) {
+    function playlistService($http, $q, $log) {
+        // Fields
         var service = this,
             tracks = [],
             initiliazed = false,
             initPromise;
+        
+        // Public methods
         service.getTracks = getTracks;
-        service.setCurrentTrack = setCurrentTrack;
-        service.queueTrack = queueTrack;
         
         initPromise = init();
         
@@ -26,8 +27,8 @@
             
             var deferred = $q.defer();
             var resultPromise = (function(offset, count) {
-                return deferred.promise.then(function(toto) {
-                    return toto.slice(offset, offset + count);
+                return deferred.promise.then(function(result) {
+                    return tracks.slice(offset, offset + count);
                 });
             })(offset, count);
             
@@ -40,17 +41,15 @@
             return resultPromise;
         }
         
-        // Propagates track set event
-        function setCurrentTrack(track) {
-            $rootScope.$emit('setTrack', track);
-        }
-        
-        // Propagates track queue event
-        function queueTrack(track) {
-            $rootScope.$emit('queueTrack', track);
-        }
-        
+        // Inits service
         function init() {
+            return $q.all([
+                loadTracks(),
+            ]);
+        }
+        
+        // Loads track list
+        function loadTracks() {
             var deferred = $q.defer();
             
             $http({

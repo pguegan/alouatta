@@ -164,6 +164,12 @@
                 vm.player.muted = audio.muted;
             } else if (event.type === "timeupdate") {
                 vm.player.currentTime = audio.currentTime;
+            } else if (event.type === "durationchange") {
+                if(audio.duration === Infinity) {
+                    vm.player.duration = false;
+                } else {
+                    vm.player.duration = audio.duration;
+                }
             }
 
             scope.$apply();
