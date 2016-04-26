@@ -2,19 +2,21 @@
     angular.module('alouatta.player')
         .service('playlistService', playlistService);
         
-    playlistService.$inject = ['$http', '$q', '$log'];
+    playlistService.$inject = ['$http', '$q', '$log', 'CONFIG'];
     
-    function playlistService($http, $q, $log) {
+    function playlistService($http, $q, $log, CONFIG) {
         // Fields
         var service = this,
             tracks = [],
-            initiliazed = false,
-            initPromise;
+            isLoading = false,
+            loadingPromise,
+            currentPage = 1,
+            isNextPage;
         
         // Public methods
         service.getTracks = getTracks;
         
-        initPromise = init();
+        init();
         
         // Gets tracks
         function getTracks(offset, count) {
@@ -32,10 +34,13 @@
                 });
             })(offset, count);
             
-            if(initiliazed) {
-                deferred.resolve(tracks);
+            if(isLoading) {
+                loadingPromise.then(deferred.resolve)
+            } else if(isNextPage && offset + count > tracks.length) {
+                currentPage++;
+                loadTracks().then(deferred.resolve);
             } else {
-                initPromise.then(deferred.resolve);
+                deferred.resolve(tracks);
             }
             
             return resultPromise;
@@ -50,19 +55,28 @@
         
         // Loads track list
         function loadTracks() {
+            isLoading = true;
             var deferred = $q.defer();
+            loadingPromise = deferred.promise;
             
             $http({
-                url: 'data/tracks.json',
+                url: CONFIG.playlistService.url,
+                params: {
+                    page: currentPage
+                },
                 method: 'GET'
             }).then(function(result) {
-                tracks = result.data;
-                initiliazed = true;
-                
+                isLoading = false;
+                isNextTrack = angular.isDefined(result.data.links.next);
+                for(var i=0; i<result.data.podcasts.length; i++) {
+                    result.data.podcasts[i].mp3 = CONFIG.playlistService.srcPrefix + result.data.podcasts[i].mp3;
+                    tracks.push(result.data.podcasts[i]);
+                }
                 deferred.resolve(tracks);
             });
             
-            return deferred.promise;
+            
+            return loadingPromise;
         }
     }
 })(window, document, angular);

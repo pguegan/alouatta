@@ -6,6 +6,7 @@
                 'preload': '@',
                 'volume': '@',
                 'src': '@',
+                'title': '@',
             },
             controller: 'playerController',
 			controllerAs: 'vm',

@@ -51,6 +51,7 @@
         
         // Inits controller
         function init() {
+            vm.player = vm.playerCtrl.player;
             getTracks();
         }
         

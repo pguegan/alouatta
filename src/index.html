@@ -29,15 +29,23 @@
     </head>
     <body>
         <main ng-app="alouatta" ng-strict-di>
-            <alouatta-player src="http://stream.myjungly.fr/RIFFX" autoplay="true" volume="0.1" preload="auto">
+            <alouatta-player title="RIFFX" src="http://stream.myjungly.fr/RIFFX" autoplay="true" volume="0.1" preload="auto">
                 <alouatta-controls></alouatta-controls>
                 <alouatta-controls type="single-button"></alouatta-controls>
                 <alouatta-playlist></alouatta-playlist>
             </alouatta-player>
             
+            <script id="templates/track-detail-default.html" type="text/ng-template">
+                <section>
+                    <span ng-show="vm.track.published_at">{{ vm.track.published_at | date:'shortDate' }} -</span>
+                    <span ng-bind="vm.track.title"></span>
+                </section>
+            </script>
+            
             <script id="templates/controls-default.html" type="text/ng-template">
                 <section>
                     <h2>Autoplay, 2 buttons</h2>
+                    <alouatta-track-detail track="vm.player.currentTrack"></alouatta-track-detail>
                     <button ng-click="vm.play()" ng-disabled="vm.player.isLoading || vm.player.isPlaying">play</button>
                     <button ng-click="vm.pause()" ng-disabled="vm.player.isLoading || !vm.player.isPlaying">pause</button>
                     
@@ -94,9 +102,7 @@
                     
                     <ul>
                         <li ng-repeat="track in vm.tracks">
-                            {{track.index}} {{ track.pubdate | date:'shortDate' }} 
-                            -
-                            <a href ng-click="vm.addTrack(track)" title="Add this track to playlist">+</a> 
+                            {{ track.published_at | date:'shortDate' }} -
                             <a href ng-click="vm.setTrack(track)" title="Play this track">{{ track.title }}</a>
                         </li>
                     </ul>

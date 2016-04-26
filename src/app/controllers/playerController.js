@@ -13,6 +13,7 @@
             isPlaying: false,
             isError: false,
             buffered: [],
+            currentTrack: {},
         };
 
         // Public methods
@@ -28,7 +29,6 @@
         // Fields
         var audio,
             previousTrack,
-            trackQueue = [],
             // Supported player events
             playerEvents = [
                 "loadstart",
@@ -87,13 +87,12 @@
         // Sets current track
         function setTrack(track) {
             if (!angular.isDefined(previousTrack)) {
-                previousTrack = audio;
-                previousTrack.pause();
-                init();
+                previousTrack = vm.player.currentTrack;
             }
-
-            audio.src = track.url;
-        }
+            
+            vm.player.currentTrack = track;
+            audio.src = track.mp3;
+        }        
 
         /*
             Internal methods
@@ -118,6 +117,10 @@
             }
             if (angular.isDefined(vm.src)) {
                 audio.src = vm.src;
+                vm.player.currentTrack.mp3 = audio.src;
+            }
+            if (angular.isDefined(vm.title)) {
+                vm.player.currentTrack.title = vm.title;
             }
 
             vm.player.volume = audio.volume;
@@ -182,10 +185,8 @@
                     audio.pause();
                 }
                 
-                audio = previousTrack;
-                audio.play();
-                
-                previousTrack = undefined;
+                vm.player.currentTrack = previousTrack;
+                audio.src = vm.player.currentTrack.mp3;
             }
         }
     }
