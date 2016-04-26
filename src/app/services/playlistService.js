@@ -1,5 +1,5 @@
 (function(window, document, angular, undefined) {
-    angular.module('alouatta.playlist')
+    angular.module('alouatta.player')
         .service('playlistService', playlistService);
         
     playlistService.$inject = ['$rootScope', '$http', '$q', '$log'];

@@ -80,10 +80,10 @@ gulp.task('uglify', function() {
       // Then add others
       './src/**/*.js',
     ])
-    //.pipe(sourcemaps.init())
+    .pipe(sourcemaps.init())
     .pipe(concat('app.min.js'))
-    //.pipe(uglify())
+    .pipe(uglify())
     //.pipe(ngAnnotate())
-    //.pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/js'));
 });

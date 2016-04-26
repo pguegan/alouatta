@@ -55,7 +55,7 @@
                         /
                         <span>{{ vm.player.duration }}</span>
                         <br />
-                        <input type="number" min="0" ng-model="vm.player.currentTime" />
+                        <input type="number" min="0" ng-model="vm.player.currentTime" ng-change="vm.setCurrentTime()" />
                     </section>
                     
                     <section>

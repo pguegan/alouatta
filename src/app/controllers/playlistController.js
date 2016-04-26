@@ -2,31 +2,31 @@
     angular.module('alouatta.playlist')
         .controller('playlistController', playerController);
     
-    playerController.$inject = ['playlistService'];
+    playerController.$inject = ['$log', 'playlistService'];
     
-    function playerController(playlistService) {
+    function playerController(log, playlistService) {
         var vm = this;
         
         // Public methods
+        vm.$onInit = init;
         vm.setTrack = setTrack;
         vm.nextPage = nextPage;
         vm.previousPage = previousPage;        
         
-        // Fields
-        
+        // Fields        
         var paging = {
             offset: 0,
             count: 10,
         };
         
-        init();
-        
         /*
             Public methods
         */
         
+        // Sets current track
         function setTrack(track) {
-            playlistService.setCurrentTrack(track);
+            vm.playerCtrl.setTrack(track);
+            vm.currentTrack = track;
         }
         
         function nextPage() {

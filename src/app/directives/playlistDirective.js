@@ -1,12 +1,17 @@
 (function(window, document, angular, undefined) {
     angular.module('alouatta.playlist')
-        .directive('alouattaPlaylist', playlistDirective);
-    
-    // Component bindable parameters
-    var playlistParameters = {
-        'autoplay': '=',
-        'volume': '=',
-    };
+        .component('alouattaPlaylist', {
+            require: {
+                playerCtrl: '^alouattaPlayer', 
+            },
+            bindings: {
+                'type': '@',
+            },
+            controller: 'playlistController',
+			controllerAs: 'vm',
+            transclude: false,
+            templateUrl: getPlaylistTemplateUrl,
+        });
     
     // Gets playlist directive's template url
     function getPlaylistTemplateUrl(element, attrs) {
@@ -16,19 +21,6 @@
             return 'templates/playlist-default.html';
         }
     }
-    // Inits playlist 
-    function initPlaylistDirective(scope, element, attrs, controller, transclude) {
-    }
     
-    function playlistDirective() {
-        return {
-            restrict: 'AE',
-			bindToController: true,
-			controllerAs: 'vm',
-            templateUrl: getPlaylistTemplateUrl,
-            controller: 'playlistController',
-            scope: playlistParameters,
-            link: initPlaylistDirective,
-        };
-    }
+    getPlaylistTemplateUrl.$inject = ['$element', '$attrs'];
 })(window, document, angular);
