@@ -1,0 +1,154 @@
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-12 14:15:42 +0100
+Processing by StationsController#index as HTML
+Filter chain halted as #<Proc:0x007feaaa5e7760@/Users/philippe/.rbenv/versions/1.9.3-p448/lib/ruby/gems/1.9.1/gems/actionpack-3.2.18/lib/action_controller/metal/http_authentication.rb:112> rendered or redirected
+Completed 401 Unauthorized in 0.3ms
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-12 14:16:01 +0100
+Processing by StationsController#index as HTML
+  Rendered stations/index.html.haml within layouts/application (3.4ms)
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/08c416b5a00a2377bfdeee5070eb26b633205247/layout.css.sassc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Compiled layout.css  (23ms)  (pid 28019)
+Compiled application.css  (27ms)  (pid 28019)
+Compiled jquery.js  (0ms)  (pid 28019)
+Compiled jquery.timer.js  (0ms)  (pid 28019)
+Compiled jquery.jplayer.min.js  (0ms)  (pid 28019)
+Compiled jquery.marquee.js  (0ms)  (pid 28019)
+Compiled dragdealer.js  (0ms)  (pid 28019)
+Compiled layout.js  (66ms)  (pid 28019)
+Compiled application.js  (110ms)  (pid 28019)
+  Rendered layouts/_ga.html.erb (0.3ms)
+Completed 200 OK in 200.6ms (Views: 200.5ms)
+
+
+Started GET "/riffx" for 127.0.0.1 at 2015-11-12 14:16:32 +0100
+Processing by CustomController#show as HTML
+  Parameters: {"id"=>"riffx"}
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/a229c640a4b9b5bdd9324739b8d14a6f7fc97d44/application.css.sassc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_variables.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_mixins.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_normalize.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_scaffolding.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_type.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_grid.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_buttons.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_component-animations.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_utilities.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/93e13b2964345c57c1de59c92fceff4de76479a6/_responsive-utilities.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/96ea5dde049d67947f38af836f1c8620d4892976/font-awesome.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_variables.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_mixins.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_path.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_core.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_larger.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_fixed-width.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_list.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_bordered-pulled.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_spinning.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_rotated-flipped.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_stacked.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/4ed410c0d18c7449d38faa52a6d42e7ee151e08c/_icons.scssc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Warning. Error encountered while saving cache /Users/philippe/Sites/alouatta/tmp/cache/sass/a229c640a4b9b5bdd9324739b8d14a6f7fc97d44/layout.css.sassc: can't dump anonymous class #<Class:0x007feaa96169f8>
+Compiled riffx/application.css  (1100ms)  (pid 28019)
+Compiled html5shiv.js  (0ms)  (pid 28019)
+Compiled respond.js  (0ms)  (pid 28019)
+Compiled modernizr.js  (0ms)  (pid 28019)
+Compiled riffx/layout.js  (24ms)  (pid 28019)
+Compiled riffx/application.js  (56ms)  (pid 28019)
+  Rendered layouts/_ga.html.erb (0.3ms)
+  Rendered custom/riffx.html.haml (1215.5ms)
+Completed 200 OK in 1216.5ms (Views: 1216.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:16:34 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (5.2ms)
+Completed 200 OK in 1093.4ms (Views: 6.4ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:16:40 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 473.1ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:16:46 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 292.2ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:16:52 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 294.5ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:16:58 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.2ms)
+Completed 200 OK in 288.7ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:17:04 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 291.0ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:17:10 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 297.7ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:17:16 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 292.0ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:17:22 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 303.8ms (Views: 1.3ms)
+
+
+Started GET "/riffx" for 127.0.0.1 at 2015-11-12 14:17:23 +0100
+Processing by CustomController#show as HTML
+  Parameters: {"id"=>"riffx"}
+  Rendered layouts/_ga.html.erb (0.0ms)
+  Rendered custom/riffx.html.haml (3.2ms)
+Completed 200 OK in 3.7ms (Views: 3.7ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:17:23 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 401.0ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:17:29 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 207.3ms (Views: 1.3ms)
+
+
+Started GET "/stations/RIFFX/status.json" for 127.0.0.1 at 2015-11-12 14:17:35 +0100
+Processing by StationsController#status as JSON
+  Parameters: {"id"=>"RIFFX"}
+  Rendered stations/status.json.jbuilder (0.1ms)
+Completed 200 OK in 208.0ms (Views: 1.3ms)
