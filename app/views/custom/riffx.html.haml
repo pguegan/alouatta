@@ -13,16 +13,17 @@
     = render partial: "/layouts/ga", locals: { code: 'UA-6516494-19' }
     = csrf_meta_tags
   %body
-    #player
+    - current_genre = params[:genre].present? ? params[:genre] : ""
+    #player{"data-genre" => current_genre.upcase}
     .outer
       .middle
         .container
-          %header.row
-            .col-lg-12
-              - if is_mobile_device?
-                %a.btn-power.btn-power-mobile.active{href: "javascript:void(0);"}
-                  %i.fa.fa-power-off
-              = image_tag "riffx/logo.png"
+          %header
+            .logo
+              = image_tag "riffx/Logo_RIFFX-#{current_genre.upcase}.png"
+          - if is_mobile_device?
+            %a.btn-power.btn-power-mobile.active{href: "javascript:void(0);"}
+              %i.fa.fa-power-off
           .row.covers
             .col-lg-12
               .cover
@@ -45,7 +46,14 @@
               #song-artist
                 %i.fa.fa-refresh.fa-spin
                 Chargement...
-          - unless is_mobile_device?
+          - if is_mobile_device?
+            .row
+              .col-lg-12
+                .genres
+                  .selector
+                    - ["", "hits", "urban", "kidz"].each do |genre|
+                      = link_to (genre.blank? ? "festivals" : genre), url_for(genre: genre), class: ("current" if genre == current_genre)
+          - else
             .row
               .col-lg-12
                 .controls
@@ -56,3 +64,7 @@
                       .handle
                         .cursor
                     #volume-highlight
+                .genres
+                  .selector
+                    - ["", "hits", "urban", "kidz"].each do |genre|
+                      = link_to (genre.blank? ? "festivals" : genre), url_for(genre: genre), class: ("current" if genre == current_genre)

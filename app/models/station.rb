@@ -19,8 +19,8 @@ class Station
     stations.reject { |station| station.name =~ /MCDO\d-|RIFFX|GULLI/ }
   end
 
-  def self.find(id)
-    stations.find { |station| station.name.downcase == id.downcase } || (raise StationNotFound, "Couldn't find station with id=#{id}")
+  def self.find(id, genre = nil)
+    stations.find { |station| station.name.downcase == [id, genre].compact.join("_").downcase } || (raise StationNotFound, "Couldn't find station with id=#{id}")
   end
 
   def to_param
@@ -30,7 +30,7 @@ class Station
   def path
     if @name =~ /MCDO\d-/
       "macdonalds"
-    elsif @name == "RIFFX"
+    elsif @name =~ /RIFFX/
       "riffx"
     elsif @name == "GULLI"
       "gulli"
@@ -55,13 +55,13 @@ class Station
 private
 
   def self.stations
-    @@stations ||= %w{ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX RIDER-RADIO GULLI}.map { |name| Station.new(name) }
+    @@stations ||= %w{ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX RIFFX_URBAN RIFFX_HITS RIFFX_KIDS RIDER-RADIO GULLI}.map { |name| Station.new(name) }
   end
 
   def default_cover_url
     if @name =~ /MCDO\d-/
       "/assets/macdonalds/default_cover.jpg"
-    elsif @name == "RIFFX"
+    elsif @name =~ /RIFFX/
       "/assets/riffx/default_cover.jpg"
     elsif @name == "GULLI"
       "/assets/gulli/default_cover.jpg"

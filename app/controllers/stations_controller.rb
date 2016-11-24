@@ -5,7 +5,7 @@ class StationsController < ApplicationController
   rescue_from StationNotFound, with: :station_not_found
 
   http_basic_authenticate_with name: "myjungly", password: "1707vTTv", only: :index
-  
+
   def index
     @stations = Station.index
     @title = "MyJungly Radios"

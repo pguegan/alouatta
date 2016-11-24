@@ -1,9 +1,14 @@
 jQuery ->
-    
+
+  player = $("#player")
+  genre = player.data('genre')
+  station = if genre == "" then "RIFFX" else "RIFFX_#{genre}"
+  stream = "http://stream.myjungly.fr/#{station}"
   etag = null
+
   loadData = ->
     $.ajax({
-      url: "/stations/RIFFX/status.json"
+      url: "/stations/#{station}/status.json"
       headers: { "If-None-Match": etag }
       success: (data, status, xhr) ->
         if xhr.status == 200
@@ -13,16 +18,10 @@ jQuery ->
           etag = xhr.getResponseHeader('ETag')
     })
 
-  player = $("#player")
-  station = player.data('station')
-
   player.jPlayer(
     ready: ->
-      $(this).jPlayer("setMedia", {
-        mp3: "http://stream.myjungly.fr/RIFFX"
-        #oga: "http://stream.myjungly.fr/RIFFX.ogg"
-      }).jPlayer("play")
-    supplied: "mp3" #, oga"
+      $(this).jPlayer("setMedia", { mp3: stream }).jPlayer("play")
+    supplied: "mp3"
     swfPath: "/assets"
     volume: 0.5
   ).bind($.jPlayer.event.play, (event) ->
@@ -34,10 +33,7 @@ jQuery ->
   $('.btn-power').click ->
     $(this).toggleClass('active')
     if $(this).hasClass('active')
-      player.jPlayer("setMedia", {
-        mp3: "http://stream.myjungly.fr/RIFFX"
-        #oga: "http://stream.myjungly.fr/RIFFX.ogg"
-      }).jPlayer("play")
+      player.jPlayer("setMedia", { mp3: stream }).jPlayer("play")
     else
       player.jPlayer("clearMedia").jPlayer("stop")
 
@@ -54,7 +50,7 @@ jQuery ->
   )
 
   $(window).resize ->
-    $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px") 
+    $("#volume-highlight").css("width", parseInt($('.handle').css('left')) + 10 + "px")
 
   $('#btn-play').click ->
     player.jPlayer("play")
