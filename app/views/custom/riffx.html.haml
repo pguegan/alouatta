@@ -46,16 +46,9 @@
               #song-artist
                 %i.fa.fa-refresh.fa-spin
                 Chargement...
-          - if is_mobile_device?
-            .row
-              .col-lg-12
-                .genres
-                  .selector
-                    - ["", "hits", "urban", "kidz"].each do |genre|
-                      = link_to (genre.blank? ? "festivals" : genre), url_for(genre: genre), class: ("current" if genre == current_genre)
-          - else
-            .row
-              .col-lg-12
+          .row
+            .col-lg-12
+              - unless is_mobile_device?
                 .controls
                   %a.btn-power.active{href: "javascript:void(0);"}
                     %i.fa.fa-power-off
@@ -64,7 +57,7 @@
                       .handle
                         .cursor
                     #volume-highlight
-                .genres
-                  .selector
-                    - ["", "hits", "urban", "kidz"].each do |genre|
-                      = link_to (genre.blank? ? "festivals" : genre), url_for(genre: genre), class: ("current" if genre == current_genre)
+              .genres
+                .selector
+                  - ["", "hits", "urban", "kids"].each do |genre|
+                    = link_to (genre.blank? ? "festivals" : genre), url_for(genre: genre), class: ("current" if genre == current_genre)
