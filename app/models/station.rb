@@ -20,7 +20,7 @@ class Station
   end
 
   def self.find(id, genre = nil)
-    stations.find { |station| station.name.downcase == [id, genre].compact.join("_").downcase } || (raise StationNotFound, "Couldn't find station with id=#{id}")
+    stations.find { |station| station.name.downcase == [id, genre].compact.join("_").downcase } || (raise StationNotFound, "Couldn't find station with id=#{id} and genre=#{genre}")
   end
 
   def to_param
@@ -45,7 +45,8 @@ class Station
       data = document["mounts"].select { |mount| mount["mount"] == "/#{@name}" }.first["title"].scan(Regexp.new("(.+)\\s-\\s(.+)")).first
     else
       document = Nokogiri::HTML(open('http://stream.myjungly.fr:8000/title.xsl'))
-      data = document.xpath("//pre").first.content.scan(Regexp.new("#{@name}\\|\\|(.+)\\s-\\s(.+)")).first
+      stream_name = (@name == "RIFFX_TEENS" ? "RIFFX_KIDS" : @name)
+      data = document.xpath("//pre").first.content.scan(Regexp.new("#{stream_name}\\|\\|(.+)\\s-\\s(.+)")).first
     end
     Song.new data[0], data[1], cover_url(data)
   rescue
@@ -55,7 +56,7 @@ class Station
 private
 
   def self.stations
-    @@stations ||= %w{ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX RIFFX_URBAN RIFFX_HITS RIFFX_KIDS RIDER-RADIO GULLI}.map { |name| Station.new(name) }
+    @@stations ||= %w{ADIDAS CLASSICS HIP-HOP HITS LOUNGE MYJUNGLY POP-ROCK SOUL-FUNK UNE-AUTRE-RADIO MCDO1- MCDO2- MCDO3- MCDO4- RIFFX RIFFX_URBAN RIFFX_HITS RIFFX_TEENS RIDER-RADIO GULLI}.map { |name| Station.new(name) }
   end
 
   def default_cover_url
