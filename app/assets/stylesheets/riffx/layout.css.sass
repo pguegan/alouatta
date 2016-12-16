@@ -1,4 +1,4 @@
-$cover-width: 174px
+$cover-width: 214px
 
 .outer
   display: table
@@ -15,6 +15,8 @@ $cover-width: 174px
   background-position: center
   background-repeat: no-repeat
   text-align: center
+  padding-top: 15px
+  padding-bottom: 15px
 
 img
   @include img-responsive
@@ -42,8 +44,8 @@ img
       cursor: pointer
       z-index: 2000
       text-align: center
-      padding-top: 40px
-      font-size: 5em
+      padding-top: 80px
+      font-size: 3em
     ul.social
       position: absolute
       list-style: none
@@ -109,7 +111,7 @@ header
     font-size: 25px
     top: 5px
     left: 20px
-    color: #aaa
+    color: #a64600
     &.active
       color: #fff
 .volume-bar
@@ -151,7 +153,7 @@ header
   border-bottom-left-radius: 5px
   border-bottom-right-radius: 5px
   padding: 4px
-  line-height: 43px
+  line-height: 40px
   font-family: "HelveticaNeue-CondensedBold", "HelveticaNeue", Arial, Sans-Serif
   text-transform: uppercase
   -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3)
@@ -162,30 +164,37 @@ header
   .selector
     border-bottom-left-radius: 5px
     border-bottom-right-radius: 5px
-    background-image: url('/assets/riffx/Texture_Grille@2x.png')
+    background-image: url('/assets/riffx/Texture_Grille.png')
     a
       color: #4F4F4F
       text-decoration: none
-      font-size: 18px
+      font-size: 20px
       margin: 0 5px
+      &.main
+        position: relative
+        top: 4px
+        font-size: 30px
       &:hover
         color: #A0A0A0
       &.current
         color: #FFA200
 
 @media (max-width: $screen-sm-min - 1)
+  header
+    .logo
+      width: 100px
   .covers
     margin: 10px 0
     .cover
-      width: 0.75 * $cover-width
+      width: 0.65 * $cover-width
       a#btn-play
-        padding-top: 15px
+        padding-top: 40px
       #loading
-        padding-top: 15px
+        padding-top: 40px
   img#song-cover
-    max-width: 0.75 * $cover-width
+    max-width: 0.65 * $cover-width
   .titles
-    margin: 15px 0
+    margin: 15px 0 10px 0
     #song-title
       font-size: 1.3em
     #song-artist

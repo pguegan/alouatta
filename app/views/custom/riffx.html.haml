@@ -20,7 +20,7 @@
         .container
           %header
             .logo
-              = image_tag "riffx/Logo_RIFFX-#{current_genre.upcase}.png"
+              = image_tag "riffx/logo.png"
           - if is_mobile_device?
             %a.btn-power.btn-power-mobile.active{href: "javascript:void(0);"}
               %i.fa.fa-power-off
@@ -60,4 +60,4 @@
               .genres
                 .selector
                   - ["", "hits", "urban", "teens"].each do |genre|
-                    = link_to (genre.blank? ? "festivals" : genre), url_for(genre: genre), class: ("current" if genre == current_genre)
+                    = link_to (genre.blank? ? "Indé." : genre), url_for(genre: genre), class: [("current" if genre == current_genre), ("main" if genre.blank?)].compact.join(' ')

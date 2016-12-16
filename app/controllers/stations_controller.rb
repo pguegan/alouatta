@@ -4,7 +4,7 @@ class StationsController < ApplicationController
 
   rescue_from StationNotFound, with: :station_not_found
 
-  http_basic_authenticate_with name: "myjungly", password: "1707vTTv", only: :index
+  http_basic_authenticate_with name: "myjungly", password: "1707vTTv", only: :index unless Rails.env.development?
 
   def index
     @stations = Station.index
