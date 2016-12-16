@@ -3,7 +3,7 @@ jQuery ->
   player = $("#player")
   genre = player.data('genre')
   station = if genre == "" then "RIFFX" else "RIFFX_#{genre}"
-  stream = if genre == "TEENS" then "http://stream.myjungly.fr/RIFFX_KIDS" else "http://stream.myjungly.fr/#{station}"
+  stream = if genre == "FAN" then "http://stream.myjungly.fr/RIFFX_KIDS" else "http://stream.myjungly.fr/#{station}"
   etag = null
 
   loadData = ->
