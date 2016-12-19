@@ -45,7 +45,7 @@ class Station
       data = document["mounts"].select { |mount| mount["mount"] == "/#{@name}" }.first["title"].scan(Regexp.new("(.+)\\s-\\s(.+)")).first
     else
       document = Nokogiri::HTML(open('http://stream.myjungly.fr:8000/title.xsl'))
-      stream_name = (@name == "RIFFX_TEENS" ? "RIFFX_KIDS" : @name)
+      stream_name = (@name == "RIFFX_FAN" ? "RIFFX_KIDS" : @name)
       data = document.xpath("//pre").first.content.scan(Regexp.new("#{stream_name}\\|\\|(.+)\\s-\\s(.+)")).first
     end
     Song.new data[0], data[1], cover_url(data)
