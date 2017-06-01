@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.18'
 
-gem 'thin'
+gem 'unicorn', '~> 4.8.2'
 gem 'capistrano', require: false
 gem 'rvm-capistrano', require: false
 gem 'nokogiri'
