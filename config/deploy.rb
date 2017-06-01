@@ -30,7 +30,7 @@ ssh_options[:forward_agent] = true
 after 'deploy',                    'deploy:cleanup'
 after 'deploy:finalize_update',    'deploy:link_configuration'
 after 'deploy:finalize_update',    'deploy:link_uploads'
-after 'deploy:link_configuration', 'deploy:migrate'
+#after 'deploy:link_configuration', 'deploy:migrate'
 after 'deploy:setup',              'deploy:setup_configuration'
 
 namespace :deploy do
@@ -60,13 +60,13 @@ namespace :deploy do
     #sudo "ln -nfs #{current_path}/config/unicorn.sh /etc/init.d/unicorn_#{application}_#{rails_env}"
     run "chmod +x #{shared_path}/config/unicorn.sh"
     template "unicorn.rb", "#{shared_path}/config/unicorn.rb"
-    template "database.yml", "#{shared_path}/config/database.yml", password: Capistrano::CLI.password_prompt("Password for database (#{application}_#{rails_env}): ")
+    # template "database.yml", "#{shared_path}/config/database.yml", password: Capistrano::CLI.password_prompt("Password for database (#{application}_#{rails_env}): ")
     run "mkdir -p #{shared_path}/uploads"
     run "mkdir -p #{shared_path}/private"
   end
 
   task :link_configuration, roles: :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    #run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/nginx.conf #{release_path}/config/nginx.conf"
     run "ln -nfs #{shared_path}/config/unicorn.rb #{release_path}/config/unicorn.rb"
     run "ln -nfs #{shared_path}/config/unicorn.sh #{release_path}/config/unicorn.sh"
@@ -74,7 +74,10 @@ namespace :deploy do
 
   task :link_uploads do
     run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
-    run "ln -nfs #{shared_path}/private #{release_path}/private/uploads"
+  end
+
+  task :migrate do
+    # Nothing
   end
 
 end
