@@ -10,6 +10,7 @@ gem 'jbuilder'
 gem 'active_attr'
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development do
 	gem 'quiet_assets'
