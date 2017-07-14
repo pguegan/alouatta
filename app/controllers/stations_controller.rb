@@ -5,40 +5,13 @@ class StationsController < ApplicationController
 
   rescue_from StationNotFound, with: :station_not_found
 
-  http_basic_authenticate_with name: "myjungly", password: "1707vTTv", only: :index unless Rails.env.development?
-
   def index
-    respond_to do |format|
-      format.html do
-        @stations = Station.index
-        @title = "MyJungly Radios"
-      end
-      format.json do
-        @stations = Station.all
-      end
-    end
-  end
-
-  def show
-    @station = Station.find(params[:id])
-    @song = @station.current_song
-    @title = @station.name
+    @stations = Station.all
   end
 
   def status
     @station = Station.find(params[:id])
     @song = @station.current_song
-  end
-
-  def link
-    @station = Station.find(params[:id])
-  end
-
-  def mini
-    @station = Station.find(params[:id])
-    @song = @station.current_song
-    @title = @station.name
-    render layout: nil
   end
 
 private
