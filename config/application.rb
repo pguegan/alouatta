@@ -19,7 +19,11 @@ module Alouatta
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
-        resource '*', headers: :any, methods: %i(get post options)
+        resource('*',
+          headers: :any,
+          expose: %w(ETag),
+          methods: %i(get post options)
+        )
       end
     end
 

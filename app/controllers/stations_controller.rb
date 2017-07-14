@@ -1,5 +1,6 @@
 class StationsController < ApplicationController
 
+  caches_action :index, expires_in: 5.seconds
   caches_action :status, expires_in: 5.seconds
 
   rescue_from StationNotFound, with: :station_not_found
@@ -7,8 +8,15 @@ class StationsController < ApplicationController
   http_basic_authenticate_with name: "myjungly", password: "1707vTTv", only: :index unless Rails.env.development?
 
   def index
-    @stations = Station.index
-    @title = "MyJungly Radios"
+    respond_to do |format|
+      format.html do
+        @stations = Station.index
+        @title = "MyJungly Radios"
+      end
+      format.json do
+        @stations = Station.all
+      end
+    end
   end
 
   def show
