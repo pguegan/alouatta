@@ -54,6 +54,7 @@ private
 
   def self.stations
     @@stations ||= %w{
+      BASH
       CLASSICS
       HIP-HOP
       HITS
