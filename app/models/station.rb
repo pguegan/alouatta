@@ -74,6 +74,7 @@ private
       ROOTS
       JAZZ
       FR
+      SINEQUANONE
     }.map { |name| Station.new(name) }
   end
 
