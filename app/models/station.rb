@@ -75,6 +75,7 @@ private
       JAZZ
       FR
       SINEQUANONE
+      URBAN
     }.map { |name| Station.new(name) }
   end
 
