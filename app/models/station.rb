@@ -1,3 +1,4 @@
+require 'timeout'
 require 'open-uri'
 require 'net/http'
 
@@ -90,11 +91,17 @@ private
   end
 
   def cover_url(data)
-    http = Net::HTTP.new("cdn.myjungly.fr")
-    response = http.request Net::HTTP::Head.new(URI::encode("/web/#{data[0]} - #{data[1]}.jpg"))
-    if response.code == "200"
-      URI::encode("http://cdn.myjungly.fr/web/#{data[0]} - #{data[1]}.jpg")
-    else
+    begin
+      Timeout::timeout(1) do
+        http = Net::HTTP.new("cdn.myjungly.fr")
+        response = http.request Net::HTTP::Head.new(URI::encode("/web/#{data[0]} - #{data[1]}.jpg"))
+        if response.code == "200"
+          URI::encode("http://cdn.myjungly.fr/web/#{data[0]} - #{data[1]}.jpg")
+        else
+          default_cover_url
+        end
+      end
+    rescue
       default_cover_url
     end
   end
